@@ -3,6 +3,7 @@ package com.flipkart.bean;
 public class Notification {
 
     private int notificationId;
+    private String message;
 
     public int getNotificationId() {
         return notificationId;
@@ -19,7 +20,5 @@ public class Notification {
     public void setMessage(String message) {
         this.message = message;
     }
-
-    private String message;
 
 }

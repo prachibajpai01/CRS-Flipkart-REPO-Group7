@@ -3,8 +3,7 @@ package com.flipkart.bean;
 import com.flipkart.constant.Role;
 
 public class User {
-
-    private String username;
+    private String userId;
     private String password;
     private String name;
     private String address;
@@ -19,12 +18,12 @@ public class User {
         this.role = role;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getPassword() {

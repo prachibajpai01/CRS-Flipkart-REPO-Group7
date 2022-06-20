@@ -1,9 +1,9 @@
 package com.flipkart.service;
 
 public interface UserInterface {
-    public Boolean authenticate(String username, String password);
+    public Boolean authenticate(String userId, String password);
 
-    public String getRole(String username);
+    public String getRole(String userId);
 
-    public Boolean updatePassword(String username, String newPassword, String oldPassword);
+    public Boolean updatePassword(String userId, String newPassword);
 }
