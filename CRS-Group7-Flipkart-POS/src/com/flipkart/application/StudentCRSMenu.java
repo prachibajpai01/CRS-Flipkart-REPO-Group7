@@ -5,16 +5,14 @@ import java.util.Scanner;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Notification;
 import com.flipkart.bean.Grade;
-import com.flipkart.service.NotificationInterface;
-import com.flipkart.service.NotificationImpl;
 import com.flipkart.service.ProfessorInterface;
 import com.flipkart.service.ProfessorImpl;
-import com.flipkart.service.RegistrationInterface;
-import com.flipkart.service.RegistrationImpl;
+
 
 
 public class StudentCRSMenu {
     Scanner sc = new Scanner(System.in);
+    private boolean is_registered;
 
     public void create_menu(int studentId) {
 
@@ -144,7 +142,7 @@ public class StudentCRSMenu {
 
         for(Course obj : course_registered)
         {
-            System.out.println(String.format("%-20s %-20s %-20s ",obj.getCourseId(), obj.getCourseName(),obj.getInstructorId());
+            System.out.println(String.format("%-20s %-20s %-20s ",obj.getCourseId(), obj.getCourseName(),obj.getInstructorId()));
         }
 
         return course_registered;
