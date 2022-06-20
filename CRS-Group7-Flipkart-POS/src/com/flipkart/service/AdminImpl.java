@@ -19,8 +19,8 @@ public class AdminImpl implements AdminInterface{
     }
 
     @Override
-    public List<Student> viewPendingAdmissions() {
-        return null;
+    public void generateReport() {
+
     }
 
     @Override
@@ -43,8 +43,5 @@ public class AdminImpl implements AdminInterface{
         return null;
     }
 
-    @Override
-    public List<Professor> viewProfessors() {
-        return null;
-    }
+
 }
