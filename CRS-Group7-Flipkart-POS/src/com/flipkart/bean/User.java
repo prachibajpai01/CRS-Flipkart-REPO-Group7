@@ -1,11 +1,23 @@
 package com.flipkart.bean;
 
+import com.flipkart.constant.Role;
+
 public class User {
 
     private String username;
     private String password;
     private String name;
     private String address;
+
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public String getUsername() {
         return username;
