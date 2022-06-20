@@ -47,4 +47,9 @@ public class AdminImpl implements AdminInterface{
     public List<Professor> viewProfessors() {
         return null;
     }
+
+    @Override
+    public void sendNotification(int studentId) {
+
+    }
 }

@@ -15,4 +15,6 @@ public interface AdminInterface {
     public void assignCourse(String courseCode, String professorId);
     public List<Course> viewCourses(int catalogId);
     public List<Professor> viewProfessors();
+
+    public void sendNotification(int studentId);
 }
