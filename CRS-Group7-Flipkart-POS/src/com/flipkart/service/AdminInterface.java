@@ -1,4 +1,5 @@
 package com.flipkart.service;
+import java.util.Collection;
 import java.util.List;
 
 import com.flipkart.bean.Course;
@@ -7,14 +8,14 @@ import com.flipkart.bean.Student;
 
 
 public interface AdminInterface {
-    public void deleteCourse(String courseCode, List<Course> courseList);
-    public void addCourse(Course course, List<Course> courseList);
+    public void deleteCourse(String courseCode);
+    public void addCourse(Course course);
     public List<Student> viewPendingAdmissions();
-    public void approveStudent(int studentId, List<Student> studentList);
+    public void approveStudent(String studentId);
     public void addProfessor(Professor professor);
     public void assignCourse(String courseCode, String professorId);
-    public List<Course> viewCourses(int catalogId);
+    public Collection<Course> viewCourses();
     public List<Professor> viewProfessors();
 
-    public void sendNotification(int studentId);
+    public void sendNotification(String  studentId);
 }
