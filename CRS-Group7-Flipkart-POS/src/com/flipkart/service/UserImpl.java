@@ -1,10 +1,19 @@
 package com.flipkart.service;
 
-public class UserImpl implements UserInterface{
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class UserImpl implements UserInterface {
     @Override
-    public Boolean authenticate(String userId, String password) {
+    public Boolean authenticate(String userId, String password, HashMap<String, ArrayList<String>> userData) {
         System.out.println("Inside authentication");
-        return null;
+        if(userData.get(userId).get(0).compareToIgnoreCase(password)!=0){
+            System.out.println("Wrong password");
+            return false;
+        } else {
+            System.out.println("Logged in");
+            return true;
+        }
     }
 
     @Override
