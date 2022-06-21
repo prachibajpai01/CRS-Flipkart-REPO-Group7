@@ -58,7 +58,7 @@ public class AdminCRSMenu {
                     break;
 
                 case 7:
-                    CRSApplication.loggedin= false;
+                    CRSApplication.loggedin = false;
                     return;
 
                 default:

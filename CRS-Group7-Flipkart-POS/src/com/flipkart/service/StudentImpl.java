@@ -31,7 +31,6 @@ public class StudentImpl implements StudentInterface{
 
     @Override
     public boolean isApproved(String userId) {
-        System.out.println("Inside isApproved...");
         return true;
     }
 

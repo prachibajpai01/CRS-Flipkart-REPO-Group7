@@ -16,14 +16,12 @@ import javax.swing.plaf.synth.SynthEditorPaneUI;
 
 public class StudentCRSMenu {
     Scanner sc = new Scanner(System.in);
-
-    Boolean isLoggedIn = true;
     CourseCatalogueImpl courseCatalogue = null;
     StudentImpl studentImpl=new StudentImpl();
 
     public void create_menu(String studentId, CourseCatalogueImpl courseCatalogue) {
         this.courseCatalogue = courseCatalogue;
-        while (isLoggedIn) {
+        while (CRSApplication.loggedin) {
             System.out.println("*****************************");
             System.out.println("**********Student Menu*********");
             System.out.println("*****************************");
@@ -61,7 +59,7 @@ public class StudentCRSMenu {
                     break;
 
                 case 6:
-                    isLoggedIn = false;
+                    CRSApplication.loggedin = false;
                     return;
 
                 default:
