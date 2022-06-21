@@ -5,6 +5,8 @@ import com.flipkart.bean.Course;
 import java.util.ArrayList;
 
 public interface CourseCatelogueInterface {
+
+    public Course getCourseInfo(String courseId);
     public ArrayList<Course> sendCatalogue();
     public void enrollStudent(String studentId, String courseId);
 

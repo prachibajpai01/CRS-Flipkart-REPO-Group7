@@ -6,12 +6,17 @@ import java.util.*;
 
 public class CourseCatalogueImpl implements CourseCatelogueInterface {
     HashMap<String, Set<String>> enrolledStudents = new HashMap<>();// courseid, enrolled students
-    HashMap<String, Course> courseId2Object = new HashMap<String, Course>(){
+     HashMap<String, Course> courseId2Object = new HashMap<String, Course>(){
         {
             put("456", new Course("456", "Java", "java@lang"));
             put("789", new Course("789", "Python", "python@lang"));
         }
     };// courseid, course object
+
+    @Override
+    public Course getCourseInfo(String courseId) {
+        return courseId2Object.get(courseId);
+    }
 
     public Set<String> getEnrolledStudents(String courseId) {
         return enrolledStudents.get(courseId);
