@@ -4,7 +4,7 @@ import com.flipkart.bean.Course;
 
 import java.util.ArrayList;
 
-public interface CourseCatalogueInterface {
+public interface CourseCatelogueInterface {
     public ArrayList<Course> sendCatalogue();
     public void enrollStudent(String studentId, String courseId);
 

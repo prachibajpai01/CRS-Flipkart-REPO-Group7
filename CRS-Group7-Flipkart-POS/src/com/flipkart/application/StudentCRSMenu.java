@@ -87,6 +87,7 @@ public class StudentCRSMenu {
 
             System.out.println("Enter the Course Code : ");
             String courseCode = sc.next();
+            studentImpl.dropCourse(studentId,courseCode,courseCatalogue);
     }
 
     private ArrayList<Course> viewCourse(String studentId) {
@@ -98,15 +99,11 @@ public class StudentCRSMenu {
         }
 
 
-        /*
-        System.out.println(String.format("%-20s %-20s %-20s %-20s", "COURSE CODE", "COURSE NAME", "INSTRUCTOR"));
-        for (Course obj : course_available) {
-            System.out.println(String.format("%-20s %-20s %-20s %-20s", obj.getCourseId(), obj.getCourseName(), obj.getInstructorId()));
-        }
-        */
 
-        for (Course c : course_available) {
-            System.out.println(c.getCourseId() + " " + c.getCourseName() + " " + c.getInstructorId());
+        System.out.println(String.format("%-20s %-20s %-20s", "COURSE CODE", "COURSE NAME", "INSTRUCTOR"));
+
+        for (Course obj : course_available) {
+            System.out.println(String.format("%-20s %-20s %-20s", obj.getCourseId(), obj.getCourseName(), obj.getInstructorId()));
         }
         return course_available;
     }
@@ -119,14 +116,11 @@ public class StudentCRSMenu {
             return null;
         }
 
-//        System.out.println(String.format("%-20s %-20s %-20s", "COURSE ID", "COURSE NAME", "INSTRUCTOR ID"));
-//
-//        for (Course obj : course_registered) {
-//            System.out.println(String.format("%-20s %-20s %-20s ", obj.getCourseId(), obj.getCourseName(), obj.getInstructorId()));
-//        }
+        System.out.println(String.format("%-20s %-20s %-20s", "COURSE ID", "COURSE NAME", "INSTRUCTOR ID"));
 
         for(String s:course_registered){
-            System.out.println(s);
+            Course c=courseCatalogue.getCourseInfo(s);
+            System.out.println(String.format("%-20s %-20s %-20s ",c.getCourseId(),c.getCourseName(),c.getInstructorId()));
         }
 
         return course_registered;
