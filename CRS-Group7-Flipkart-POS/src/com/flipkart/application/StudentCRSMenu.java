@@ -1,66 +1,66 @@
 package com.flipkart.application;
+
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Notification;
 import com.flipkart.bean.Grade;
+import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.ProfessorInterface;
 import com.flipkart.service.ProfessorImpl;
+import com.flipkart.service.StudentImpl;
 
-
+import javax.swing.plaf.synth.SynthEditorPaneUI;
 
 public class StudentCRSMenu {
     Scanner sc = new Scanner(System.in);
-    private boolean is_registered;
 
     Boolean isLoggedIn = true;
+    CourseCatalogueImpl courseCatalogue = null;
+    StudentImpl studentImpl=new StudentImpl();
 
-    public void create_menu(int studentId) {
-
+    public void create_menu(String studentId, CourseCatalogueImpl courseCatalogue) {
+        this.courseCatalogue = courseCatalogue;
         while (isLoggedIn) {
             System.out.println("*****************************");
             System.out.println("**********Student Menu*********");
             System.out.println("*****************************");
-            System.out.println("1. Course Registration");
-            System.out.println("2. Add Course");
-            System.out.println("3. Drop Course");
-            System.out.println("4. View Course");
-            System.out.println("5. View Registered Courses");
-            System.out.println("6. View grade card");
-            System.out.println("7. Make Payment");
-            System.out.println("8. Logout");
+            System.out.println("1. Add Course");
+            System.out.println("2. Drop Course");
+            System.out.println("3. View Course");
+            System.out.println("4. View Registered Courses");
+            System.out.println("5. View grade card");
+            System.out.println("6. Make Payment");
+            System.out.println("7. Logout");
             System.out.println("*****************************");
 
             int choice = sc.nextInt();
 
             switch (choice) {
                 case 1:
-                    registerCourses(studentId);
+                    addCourse(studentId);   //done
                     break;
 
                 case 2:
-                    addCourse(studentId);
-                    break;
-
-                case 3:
 
                     dropCourse(studentId);
                     break;
 
+                case 3:
+                    viewCourse(studentId);  //done
+                    break;
+
                 case 4:
-                    viewCourse(studentId);
+                    viewRegisteredCourse(studentId);    //done
                     break;
 
                 case 5:
-                    viewRegisteredCourse(studentId);
-                    break;
-
-                case 6:
                     viewGradeCard(studentId);
                     break;
 
-                case 7:
+                case 6:
                     isLoggedIn = false;
                     return;
 
@@ -70,103 +70,82 @@ public class StudentCRSMenu {
         }
     }
 
-    private void registerCourses(int studentId) {
-        if (is_registered) {
-            System.out.println(" Registration is already completed");
-            return;
-        }
+    private void addCourse(String studentId) {
+        Scanner sc=new Scanner(System.in);
+        viewCourse(studentId);
 
-        System.out.println("Registration Successful");
-        is_registered = true;
+        System.out.println("Enter course id to add :");
+        String newcourseid=sc.nextLine();
+        studentImpl.addCourse(studentId,newcourseid,courseCatalogue);
     }
 
-    private void addCourse(int studentId) {
-        if (is_registered) {
-            List<Course> availableCourseList = viewCourse(studentId);
+    private void dropCourse(String studentId) {
+            Set<String> registeredCourseList = viewRegisteredCourse(studentId);
 
-            if (availableCourseList == null)
-                return;
-
-        } else {
-            System.out.println("Please complete registration");
-        }
-    }
-
-    private void dropCourse(int studentId)
-    {
-        if(is_registered)
-        {
-            List<Course> registeredCourseList=viewRegisteredCourse(studentId);
-
-            if(registeredCourseList==null)
+            if (registeredCourseList == null)
                 return;
 
             System.out.println("Enter the Course Code : ");
             String courseCode = sc.next();
-        }
-        else
-        {
-            System.out.println("Please complete registration");
-        }
     }
 
-    private List<Course> viewCourse(int studentId)
-    {
-        List<Course> course_available=null;
+    private ArrayList<Course> viewCourse(String studentId) {
+        ArrayList<Course> course_available = courseCatalogue.sendCatalogue();
 
-        if(course_available.isEmpty())
-        {
+        if (course_available.isEmpty()) {
             System.out.println("NO COURSE AVAILABLE");
-            return null;
+            return new ArrayList<>();
         }
 
 
-        System.out.println(String.format("%-20s %-20s %-20s %-20s","COURSE CODE", "COURSE NAME", "INSTRUCTOR"));
-        for(Course obj : course_available)
-        {
-            System.out.println(String.format("%-20s %-20s %-20s %-20s",obj.getCourseId(), obj.getCourseName(),obj.getInstructorId()));
+        /*
+        System.out.println(String.format("%-20s %-20s %-20s %-20s", "COURSE CODE", "COURSE NAME", "INSTRUCTOR"));
+        for (Course obj : course_available) {
+            System.out.println(String.format("%-20s %-20s %-20s %-20s", obj.getCourseId(), obj.getCourseName(), obj.getInstructorId()));
+        }
+        */
+
+        for (Course c : course_available) {
+            System.out.println(c.getCourseId() + " " + c.getCourseName() + " " + c.getInstructorId());
         }
         return course_available;
     }
 
-    private List<Course> viewRegisteredCourse(int studentId)
-    {
-        List<Course> course_registered=null;
+    private Set<String> viewRegisteredCourse(String studentId) {
+        Set<String> course_registered = studentImpl.viewRegisteredCourses(studentId);
 
-
-        if(course_registered.isEmpty())
-        {
+        if (course_registered==null) {
             System.out.println("You haven't registered for any course");
             return null;
         }
 
-        System.out.println(String.format("%-20s %-20s %-20s","COURSE ID", "COURSE NAME","INSTRUCTOR ID"));
+//        System.out.println(String.format("%-20s %-20s %-20s", "COURSE ID", "COURSE NAME", "INSTRUCTOR ID"));
+//
+//        for (Course obj : course_registered) {
+//            System.out.println(String.format("%-20s %-20s %-20s ", obj.getCourseId(), obj.getCourseName(), obj.getInstructorId()));
+//        }
 
-        for(Course obj : course_registered)
-        {
-            System.out.println(String.format("%-20s %-20s %-20s ",obj.getCourseId(), obj.getCourseName(),obj.getInstructorId()));
+        for(String s:course_registered){
+            System.out.println(s);
         }
 
         return course_registered;
     }
 
 
-    private void viewGradeCard(int studentId)
-    {
+    private void viewGradeCard(String studentId) {
 
 
-        List<Grade> grade_card=null;
-        System.out.println(String.format("%-20s %-20s %-20s","COURSE ID", "GRADE"));
+        List<Grade> grade_card = null;
+        System.out.println(String.format("%-20s %-20s %-20s", "COURSE ID", "GRADE"));
 
-        if(grade_card.isEmpty())
-        {
+        if (grade_card.isEmpty()) {
             System.out.println("You haven't registered for any course");
             return;
         }
 
-        for(Grade obj : grade_card)
-        {
-            System.out.println(String.format("%-20s %-20s %-20s",obj.getCourseId(),obj.getGrade()));
+        for (Grade obj : grade_card) {
+            System.out.println(String.format("%-20s %-20s %-20s", obj.getCourseId(), obj.getGrade()));
         }
     }
 

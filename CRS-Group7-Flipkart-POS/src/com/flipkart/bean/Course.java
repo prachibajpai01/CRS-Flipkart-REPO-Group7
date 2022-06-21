@@ -5,12 +5,15 @@ public class Course {
     private String courseName;
     private String instructorId;
 
+    public Course(){
+
+    }
     public Course(String courseId, String courseName, String  instructorId){
         this.courseId = courseId;
         this.courseName = courseName;
-
         this.instructorId = instructorId;
     };
+
 
     public String getCourseId() {
         return courseId;

@@ -1,13 +1,20 @@
 package com.flipkart.application;
 
 import com.flipkart.constant.Role;
+import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.StudentImpl;
 import com.flipkart.service.UserImpl;
+
+import java.util.HashMap;
 import java.util.Scanner;
+
+
 
 public class CRSApplication {
     UserImpl userImpl=new UserImpl();
     StudentImpl studentImpl=new StudentImpl();
+
+    CourseCatalogueImpl courseCatalogue = new CourseCatalogueImpl();
     static boolean loggedin = false;
 
     public static void main(String[] args) {
@@ -50,6 +57,7 @@ public class CRSApplication {
         password=sc.next();
 
         loggedin=userImpl.authenticate(userId,password);
+//        loggedin=true;
 
         if(loggedin) {
             String role = userImpl.getRole(userId);
@@ -61,12 +69,12 @@ public class CRSApplication {
                 case PROFESSOR:
                     //call menu
                 case STUDENT:
-                    int studentId=studentImpl.getStudentId(userId);
+                    String studentId=studentImpl.getStudentId(userId);
                     boolean isApproved=studentImpl.isApproved(studentId);
 
                     if(isApproved){
                         StudentCRSMenu studentCRSMenu=new StudentCRSMenu();
-                        studentCRSMenu.create_menu(studentId);
+                        studentCRSMenu.create_menu(studentId, courseCatalogue);
                     }
                     else{
                         System.out.println("Failed to login, you have not been approved by the administration!");
@@ -81,7 +89,7 @@ public class CRSApplication {
 
     public void registerStudent() {
         Scanner sc=new Scanner(System.in);
-        String userId,name,password,address,country,branch;
+        String userId,name,password,address,branch;
         int batch;
 
         System.out.println("Name:");
@@ -97,10 +105,8 @@ public class CRSApplication {
         sc.nextLine();
         System.out.println("Address:");
         address=sc.nextLine();
-        System.out.println("Country");
-        country=sc.next();
 
-        int studentId=studentImpl.register(name,userId,password,batch,branch,address,country);
+//        int studentId=studentImpl.register(name,userId,password,batch,branch,address);
     }
 
     public void updatePassword() {
@@ -115,7 +121,6 @@ public class CRSApplication {
 
         if(isUpdated)
             System.out.println("Password updated successfully!");
-
         else
             System.out.println("Error while updating. Please try again!");
     }
