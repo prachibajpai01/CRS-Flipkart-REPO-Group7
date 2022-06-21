@@ -88,7 +88,12 @@ public class AdminImpl implements AdminInterface{
 
     @Override
     public void assignCourse(String courseCode, String professorId) {
-
+        Course oldCourse = courseList.get(courseCode);
+        try {
+            courseList.replace(courseCode, new Course(oldCourse.getCourseId(), oldCourse.getCourseName(), professorId));
+        }catch (Exception e){
+            System.out.println("There was some error in assigning the courser");
+        }
     }
 
     @Override
