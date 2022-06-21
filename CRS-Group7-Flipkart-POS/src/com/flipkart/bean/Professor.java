@@ -4,6 +4,12 @@ public class Professor extends User{
     private String department;
     private String designation;
 
+    public Professor(String department,String designation,String id){
+        this.department = department;
+        this.designation = designation;
+        this.setUserId(id);
+    };
+
     public String getDepartment() {
         return department;
     }

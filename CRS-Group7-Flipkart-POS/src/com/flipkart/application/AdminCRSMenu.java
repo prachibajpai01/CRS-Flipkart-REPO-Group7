@@ -7,6 +7,8 @@ import com.flipkart.constant.Role;
 import com.flipkart.service.AdminImpl;
 import com.flipkart.service.AdminInterface;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
@@ -79,7 +81,7 @@ public class AdminCRSMenu {
         Course course = new Course(courseCode, courseName, null);
 
         try {
-            adminImpl.addCourse(course, courseList);
+            adminImpl.addCourse(course);
         } catch (Exception e) {
             System.out.println("Cannot add course");
         }
@@ -95,7 +97,7 @@ public class AdminCRSMenu {
         String courseCode = s.next();
 
         try {
-            adminImpl.deleteCourse(courseCode, courseList);
+            adminImpl.deleteCourse(courseCode);
         } catch (Exception e) {
             System.out.println("Cannot delete course");
         }
@@ -113,12 +115,12 @@ public class AdminCRSMenu {
         }
 
         System.out.println("Enter Student's ID:");
-        int studentUserIdApproval = s.nextInt();
+        String studentUserIdApproval = s.nextLine();
 
         try {
-            adminImpl.approveStudent(studentUserIdApproval, studentList);
+            adminImpl.approveStudent(studentUserIdApproval);
             //send notification from system
-            adminImpl.sendNotification( studentUserIdApproval);
+            adminImpl.sendNotification(studentUserIdApproval);
 
         } catch (Exception e) {
             System.out.println("Cannot approve registration");
@@ -127,27 +129,26 @@ public class AdminCRSMenu {
 
     private void addProfessor() {
 
-        Professor professor = new Professor();
+
 
         System.out.println("Enter Professor Name:");
         String professorName = s.next();
-        professor.setName(professorName);
 
         System.out.println("Enter Department:");
         String department = s.next();
-        professor.setDepartment(department);
 
         System.out.println("Enter Designation:");
         String designation = s.next();
-        professor.setDesignation(designation);
 
         System.out.println("Enter User Id:");
         String userId = s.next();
-        professor.setUserId(userId);
+
+        Professor professor = new Professor(department,designation,userId);
 
         System.out.println("Enter Password:");
         String password = s.next();
         professor.setPassword(password);
+        professor.setName(professorName);
 
         System.out.println("Enter Address:");
         String address = s.next();
@@ -176,7 +177,7 @@ public class AdminCRSMenu {
 
 
         System.out.println("\n\n");
-        List<Course> courseList= adminImpl.viewCourses(1);
+        Collection<Course> courseList= adminImpl.viewCourses();
         System.out.println("**************** Course ****************");
         System.out.println(String.format("%20s | %20s", "CourseCode", "CourseName"));
         for(Course course : courseList) {
@@ -213,7 +214,7 @@ public class AdminCRSMenu {
         }
         System.out.println(String.format("%20s | %20s | %20s | %20s", "UserId", "StudentId", "Name", "Gender"));
         for(Student student : pendingStudentsList) {
-            System.out.println(String.format("%20s | %20d | %20s", student.getUserId(), student.getStudentId(), student.getName()));
+            System.out.println(String.format("%20s | %20d | %20s", student.getUserId(), student.getUserId(), student.getName()));
         }
         return pendingStudentsList;
     }
@@ -224,7 +225,9 @@ public class AdminCRSMenu {
      * @return List of courses in catalogue
      */
     private List<Course> viewCoursesInCatalogue() {
-        List<Course> courseList = adminImpl.viewCourses(1);
+        Collection<Course> cL = adminImpl.viewCourses();
+        List<Course> courseList = new ArrayList<>(cL);
+
         if(courseList.size() == 0) {
             System.out.println("No course in the catalogue!");
             return courseList;
