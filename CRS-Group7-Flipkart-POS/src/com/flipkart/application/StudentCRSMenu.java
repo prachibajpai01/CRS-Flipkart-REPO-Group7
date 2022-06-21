@@ -14,9 +14,11 @@ public class StudentCRSMenu {
     Scanner sc = new Scanner(System.in);
     private boolean is_registered;
 
+    Boolean isLoggedIn = true;
+
     public void create_menu(int studentId) {
 
-        while (CRSApplication.loggedin) {
+        while (isLoggedIn) {
             System.out.println("*****************************");
             System.out.println("**********Student Menu*********");
             System.out.println("*****************************");
@@ -59,7 +61,7 @@ public class StudentCRSMenu {
                     break;
 
                 case 7:
-                    CRSApplication.loggedin = false;
+                    isLoggedIn = false;
                     return;
 
                 default:
