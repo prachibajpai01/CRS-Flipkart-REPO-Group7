@@ -51,24 +51,22 @@ public class CRSApplication {
     public void loginUser() {
         Scanner sc=new Scanner(System.in);
         String userId,password;
-        System.out.println("Email:");
+        System.out.println("Userid:");
         userId=sc.next();
         System.out.println("Password:");
         password=sc.next();
 
-        loggedin=userImpl.authenticate(userId,password);
-//        loggedin=true;
+        loggedin = userImpl.authenticate(userId,password);
 
         if(loggedin) {
             String role = userImpl.getRole(userId);
-            Role userRole = Role.stringToName(role);
-            switch (userRole) {
-                case ADMIN:
+            switch (role) {
+                case "ADMIN":
                     AdminCRSMenu adminCRSMenu=new AdminCRSMenu();
                     adminCRSMenu.createMenu();
-                case PROFESSOR:
+                case "PROFESSOR":
                     //call menu
-                case STUDENT:
+                case "STUDENT":
                     String studentId=studentImpl.getStudentId(userId);
                     boolean isApproved=studentImpl.isApproved(studentId);
 

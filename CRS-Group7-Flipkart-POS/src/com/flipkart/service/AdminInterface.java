@@ -3,6 +3,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Notification;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 
@@ -17,5 +18,5 @@ public interface AdminInterface {
     public Collection<Course> viewCourses();
     public List<Professor> viewProfessors();
 
-    public void sendNotification(String  studentId);
+    public void sendNotification(String  studentId, Notification notification);
 }

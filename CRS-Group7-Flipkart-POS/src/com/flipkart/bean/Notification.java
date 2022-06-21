@@ -1,9 +1,20 @@
 package com.flipkart.bean;
 
+import com.flipkart.constant.NotificationType;
+
 public class Notification {
 
     private int notificationId;
     private String message;
+
+    private NotificationType notificationType;
+
+    public Notification(){}
+
+    public Notification(int notificationId,String message){
+        this.notificationId = notificationId;
+        this.message = message;
+    }
 
     public int getNotificationId() {
         return notificationId;
@@ -19,6 +30,14 @@ public class Notification {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public NotificationType getNotificationType() {
+        return notificationType;
+    }
+
+    public void setNotificationType(NotificationType notificationType) {
+        this.notificationType = notificationType;
     }
 
 }

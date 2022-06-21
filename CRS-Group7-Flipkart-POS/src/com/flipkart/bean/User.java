@@ -10,6 +10,15 @@ public class User {
 
     private Role role;
 
+    public User(){}
+
+    public User(String userId,String password,String name,Role role){
+        this.userId = userId;
+        this.password = password;
+        this.name = name;
+        this.role = role;
+    }
+
     public Role getRole() {
         return role;
     }

@@ -1,8 +1,10 @@
 package com.flipkart.service;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Notification;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
+import com.flipkart.constant.NotificationType;
 
 import java.util.*;
 
@@ -32,6 +34,8 @@ public class AdminImpl implements AdminInterface{
         }
         try{
             courseList.remove(courseCode);
+            System.out.println("Course removed successfully");
+
         }catch (Exception e){
             System.out.println("There was some error in deleting course");
         }
@@ -39,11 +43,13 @@ public class AdminImpl implements AdminInterface{
 
     @Override
     public void addCourse(Course course) {
-        if(!courseList.containsKey(course.getCourseId())){
+        if(courseList.containsKey(course.getCourseId())){
             System.out.println("Course already present in catalog");
         }
         try{
             courseList.put(course.getCourseId(), course);
+            System.out.println("Course added successfully");
+
         }catch (Exception e){
             System.out.println("There was some error in adding course");
         }
@@ -55,8 +61,12 @@ public class AdminImpl implements AdminInterface{
         for(Student s : studentList.values()){
             if(s.getApproved() == false){
                 pendingStudents.add(s);
+                Notification notification = new Notification(1,"Registration is pending..");
+                notification.setNotificationType(NotificationType.PAYMENT_DUE);
+                sendNotification(s.getUserId(),notification);
             }
         }
+        System.out.println("List of pending student(s) are : ");
         return pendingStudents;
     }
 
@@ -69,6 +79,8 @@ public class AdminImpl implements AdminInterface{
         }
         try {
             studentList.replace(studentId, new Student(oldStudent.getBranchName(), oldStudent.getBatch(), true, studentId));
+            System.out.println("Student approved successfully");
+
         }catch (Exception e){
             System.out.println("Couldn't approve registration");
         }
@@ -80,6 +92,7 @@ public class AdminImpl implements AdminInterface{
             System.out.println("Professor with same userid already present");
         }
         try{
+            System.out.println("Professor added successfully");
             professorList.put(professor.getUserId(), professor);
         }catch (Exception e){
             System.out.println("There was some error in adding professor");
@@ -90,6 +103,7 @@ public class AdminImpl implements AdminInterface{
     public void assignCourse(String courseCode, String professorId) {
         Course oldCourse = courseList.get(courseCode);
         try {
+            System.out.println("Course assigned successfully");
             courseList.replace(courseCode, new Course(oldCourse.getCourseId(), oldCourse.getCourseName(), professorId));
         }catch (Exception e){
             System.out.println("There was some error in assigning the courser");
@@ -108,7 +122,7 @@ public class AdminImpl implements AdminInterface{
     }
 
     @Override
-    public void sendNotification(String studentId) {
+    public void sendNotification(String studentId,Notification notification) {
 
     }
 }

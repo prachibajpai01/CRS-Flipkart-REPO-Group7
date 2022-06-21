@@ -8,7 +8,9 @@ public class Professor extends User{
         this.department = department;
         this.designation = designation;
         this.setUserId(id);
-    };
+    }
+
+    public Professor(){}
 
     public String getDepartment() {
         return department;

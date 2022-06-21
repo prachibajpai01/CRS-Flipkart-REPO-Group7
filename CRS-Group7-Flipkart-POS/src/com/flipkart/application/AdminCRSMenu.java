@@ -1,6 +1,7 @@
 package com.flipkart.application;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Notification;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.constant.Role;
@@ -16,9 +17,8 @@ public class AdminCRSMenu {
 
     Scanner s = new Scanner(System.in);
     AdminInterface adminImpl = new AdminImpl();
-    Boolean isLoggedIn = true;
     public void createMenu(){
-        while(isLoggedIn){
+        while(CRSApplication.loggedin){
             System.out.println("*****************************");
             System.out.println("**********Admin Menu*********");
             System.out.println("1. Add Course to catalog");
@@ -58,13 +58,14 @@ public class AdminCRSMenu {
                     break;
 
                 case 7:
-                    isLoggedIn = false;
+                    CRSApplication.loggedin= false;
                     return;
 
                 default:
                     System.out.println("***** Wrong Choice *****");
             }
         }
+
     }
 
 
@@ -115,12 +116,12 @@ public class AdminCRSMenu {
         }
 
         System.out.println("Enter Student's ID:");
-        String studentUserIdApproval = s.nextLine();
+        String studentUserIdApproval = s.next();
 
         try {
             adminImpl.approveStudent(studentUserIdApproval);
             //send notification from system
-            adminImpl.sendNotification(studentUserIdApproval);
+            adminImpl.sendNotification(studentUserIdApproval,new Notification());
 
         } catch (Exception e) {
             System.out.println("Cannot approve registration");
@@ -128,9 +129,6 @@ public class AdminCRSMenu {
     }
 
     private void addProfessor() {
-
-
-
         System.out.println("Enter Professor Name:");
         String professorName = s.next();
 
@@ -212,9 +210,9 @@ public class AdminCRSMenu {
         if(pendingStudentsList.size() == 0) {
             return pendingStudentsList;
         }
-        System.out.println(String.format("%20s | %20s | %20s | %20s", "UserId", "StudentId", "Name", "Gender"));
+        System.out.println(String.format("%20s | %20s | %20s ", "UserId", "StudentId", "Name"));
         for(Student student : pendingStudentsList) {
-            System.out.println(String.format("%20s | %20d | %20s", student.getUserId(), student.getUserId(), student.getName()));
+            System.out.println(String.format("%20s | %20s | %20s", student.getUserId(), student.getUserId(), student.getName()));
         }
         return pendingStudentsList;
     }
