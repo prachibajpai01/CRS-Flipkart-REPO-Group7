@@ -11,4 +11,6 @@ public interface CourseCatalogueInterface {
     public void unenrollStudent(String studentId, String courseId);
 
     public void addCourse(String courseId, String courseName, String instructorId);
+
+    public Course getCourseInfo(String courseId);
 }

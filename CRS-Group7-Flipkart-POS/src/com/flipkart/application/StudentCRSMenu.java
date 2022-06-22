@@ -101,21 +101,8 @@ public class StudentCRSMenu {
     }
 
     private Set<String> viewRegisteredCourse(String studentId) {
-        Set<String> course_registered = studentImpl.viewRegisteredCourses(studentId);
 
-        if (course_registered==null) {
-            System.out.println("You haven't registered for any course");
-            return null;
-        }
-
-        System.out.println(String.format("%-20s %-20s %-20s", "COURSE ID", "COURSE NAME", "INSTRUCTOR ID"));
-
-        for(String s:course_registered){
-            Course c=courseCatalogue.getCourseInfo(s);
-            System.out.println(String.format("%-20s %-20s %-20s ",c.getCourseId(),c.getCourseName(),c.getInstructorId()));
-        }
-
-        return course_registered;
+       return null;
     }
 
 

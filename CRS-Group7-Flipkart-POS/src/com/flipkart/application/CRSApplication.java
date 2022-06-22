@@ -12,10 +12,7 @@ import java.util.Scanner;
 
 public class CRSApplication {
     UserImpl userImpl=new UserImpl();
-    //StudentImpl studentImpl=new StudentImpl();
-    AdminCRSMenu adminCRSMenu=new AdminCRSMenu();
-    ProfessorCRSMenu professorCRSMenu = new ProfessorCRSMenu();
-    StudentCRSMenu studentCRSMenu = new StudentCRSMenu();
+    StudentImpl studentImpl=new StudentImpl();
 
     CourseCatalogueImpl courseCatalogue = new CourseCatalogueImpl();
     static boolean loggedin = false;
@@ -59,20 +56,17 @@ public class CRSApplication {
         System.out.println("Password:");
         password=sc.next();
 
-        loggedin=userImpl.authenticate(userId,password);
-//        loggedin=true;
+        loggedin = userImpl.authenticate(userId,password);
 
         if(loggedin) {
             String role = userImpl.getRole(userId);
             switch (role) {
                 case "ADMIN":
+                    AdminCRSMenu adminCRSMenu=new AdminCRSMenu();
                     adminCRSMenu.createMenu();
-                case PROFESSOR:
+                case "PROFESSOR":
                     //call menu
-                    professorCRSMenu.createMenu(userId, courseCatalogue);
-                case STUDENT:
-                    studentCRSMenu.createMenu(userId, courseCatalogue);
-                    /*
+                case "STUDENT":
                     String studentId=studentImpl.getStudentId(userId);
                     boolean isApproved=studentImpl.isApproved(studentId);
 
@@ -84,7 +78,6 @@ public class CRSApplication {
                         System.out.println("Failed to login, you have not been approved by the administration!");
                     }
                     break;
-                     */
             }
         }
         else {
@@ -130,4 +123,3 @@ public class CRSApplication {
             System.out.println("Error while updating. Please try again!");
     }
 }
-

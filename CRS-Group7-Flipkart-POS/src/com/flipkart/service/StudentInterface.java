@@ -21,7 +21,7 @@ public interface StudentInterface {
 
     public ArrayList<Course> viewCourseList(CourseCatalogueImpl courseCatalogue);
 
-    public Set<String> viewRegisteredCourses(String userId);
+    public void viewRegisteredCourses(String userId);
 
     public List<Grade> viewGradeCard(int studentId);
 }

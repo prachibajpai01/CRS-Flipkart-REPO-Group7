@@ -4,7 +4,7 @@ import com.flipkart.bean.Course;
 
 import java.util.*;
 
-public class CourseCatalogueImpl implements CourseCatelogueInterface {
+public class CourseCatalogueImpl implements CourseCatalogueInterface {
     HashMap<String, Set<String>> enrolledStudents = new HashMap<>();// courseid, enrolled students
     HashMap<String, Course> courseId2Object = new HashMap<String, Course>(){
         {
@@ -48,5 +48,10 @@ public class CourseCatalogueImpl implements CourseCatelogueInterface {
         newcourse.setCourseName(courseName);
         newcourse.setInstructorId(instructorId);
         courseId2Object.put(courseId, newcourse);
+    }
+
+    @Override
+    public Course getCourseInfo(String courseId) {
+        return courseId2Object.get(courseId);
     }
 }

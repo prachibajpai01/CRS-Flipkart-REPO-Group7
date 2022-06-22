@@ -7,24 +7,7 @@ import com.flipkart.bean.Student;
 import java.util.*;
 
 public class StudentImpl implements StudentInterface{
-
-    Map<String,Student> studentObject =new HashMap<String,Student>(){{
-        put("Prachi", new Student());
-        put("Akash", new Student());
-        put("Shaurya", new Student());
-    }};  //userId,student data
-    Map<String, Set<String>> studentCourseData=new HashMap<String,Set<String>>(){{
-        put("Prachi", new HashSet<>(){{
-            add("Java");
-        }});
-        put("Akash", new HashSet<>(){{
-            add("Python");
-            add("C++");
-        }});
-        put("Shaurya", new HashSet<>(){{
-            add("Java");
-        }});
-    }}; //userId,all courses w.r.t student
+    //userId,all courses w.r.t student
 
     @Override
     public int register(String name,String userId,String password,int batch,String branch,String address){
@@ -35,7 +18,7 @@ public class StudentImpl implements StudentInterface{
         stu.setBatch(batch);
         stu.setBranchName(branch);
         stu.setAddress(address);
-        studentObject.put(userId,stu);
+//        studentObject.put(userId,stu);
         return 0;
     }
 
@@ -51,19 +34,19 @@ public class StudentImpl implements StudentInterface{
 
     @Override
     public void addCourse(String userId,String courseId, CourseCatalogueImpl courseCatalogue) {
-        if(!studentCourseData.containsKey(userId)){
-            studentCourseData.put(userId, new HashSet<>());
-        }
-
-        studentCourseData.get(userId).add(courseId);
-        //System.out.println(userId+" "+courseId);
-        courseCatalogue.enrollStudent(userId, courseId);
+//        if(!studentCourseData.containsKey(userId)){
+//            studentCourseData.put(userId, new HashSet<>());
+//        }
+//
+//        studentCourseData.get(userId).add(courseId);
+//        //System.out.println(userId+" "+courseId);
+//        courseCatalogue.enrollStudent(userId, courseId);
     }
 
     @Override
     public void dropCourse(String userId,String courseId, CourseCatalogueImpl courseCatalogue) {
-        studentCourseData.get(userId).remove(courseId);
-        courseCatalogue.unenrollStudent(userId, courseId);
+//        studentCourseData.get(userId).remove(courseId);
+//        courseCatalogue.unenrollStudent(userId, courseId);
     }
 
     @Override
@@ -73,8 +56,9 @@ public class StudentImpl implements StudentInterface{
     }
 
     @Override
-    public Set<String> viewRegisteredCourses(String userId) {
-        return studentCourseData.get(userId);
+    public void viewRegisteredCourses(String userId) {
+
+//        return studentCourseData.get(userId);
     }
 
     @Override
