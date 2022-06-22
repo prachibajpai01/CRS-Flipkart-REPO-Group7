@@ -5,12 +5,19 @@ import com.flipkart.bean.Course;
 import java.util.*;
 
 public class CourseCatalogueImpl implements CourseCatelogueInterface {
-    HashMap<String, Set<String>> enrolledStudents = new HashMap<>();// courseid, enrolled students
+    HashMap<String, Set<String>> enrolledStudents = new HashMap<>(){{
+        put("456", new HashSet<>(){{
+            add("Prachi");
+        }});
+        put("789", new HashSet<>(){{
+            add("Akash");
+            add("Shaurya");
+        }});
+    }};// courseid, enrolled students
     HashMap<String, Course> courseId2Object = new HashMap<String, Course>(){
         {
             put("456", new Course("456", "Java", "java@lang"));
             put("789", new Course("789", "Python", "python@lang"));
-            
         }
     };// courseid, course object
 

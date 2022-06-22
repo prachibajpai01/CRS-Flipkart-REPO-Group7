@@ -60,6 +60,7 @@ public class CRSApplication {
 
         loggedin=userImpl.authenticate(userId,password);
 //        loggedin=true;
+        System.out.println(loggedin);
 
         if(loggedin) {
             String role = userImpl.getRole(userId);
@@ -67,11 +68,14 @@ public class CRSApplication {
             switch (userRole) {
                 case ADMIN:
                     adminCRSMenu.createMenu();
+                    break;
                 case PROFESSOR:
                     //call menu
                     professorCRSMenu.createMenu(userId, courseCatalogue);
+                    break;
                 case STUDENT:
                     studentCRSMenu.createMenu(userId, courseCatalogue);
+                    break;
                     /*
                     String studentId=studentImpl.getStudentId(userId);
                     boolean isApproved=studentImpl.isApproved(studentId);

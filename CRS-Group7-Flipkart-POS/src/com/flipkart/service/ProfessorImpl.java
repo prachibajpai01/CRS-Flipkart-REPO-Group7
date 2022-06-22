@@ -11,11 +11,10 @@ public class ProfessorImpl implements ProfessorInterface {
     HashMap<String, Set<String>> profCourses = new HashMap<String, Set<String>>() {
         {
             put("01", new HashSet<>() {{
-                add("Java");
+                add("456");
             }});
             put("02", new HashSet<>() {{
-                add("Python");
-                add("C++");
+                add("789");
             }});
         }
     }; // profId, set of courses they teach
