@@ -10,11 +10,18 @@ public class CourseCatalogueImpl implements CourseCatelogueInterface {
         {
             put("456", new Course("456", "Java", "java@lang"));
             put("789", new Course("789", "Python", "python@lang"));
+            
         }
     };// courseid, course object
 
+
+
     public Set<String> getEnrolledStudents(String courseId) {
         return enrolledStudents.get(courseId);
+    }
+
+    public Course getCourse(String courseId){
+        return courseId2Object.get(courseId);
     }
 
     @Override
@@ -49,4 +56,6 @@ public class CourseCatalogueImpl implements CourseCatelogueInterface {
         newcourse.setInstructorId(instructorId);
         courseId2Object.put(courseId, newcourse);
     }
+
+
 }

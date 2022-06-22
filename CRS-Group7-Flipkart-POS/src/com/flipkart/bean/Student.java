@@ -14,6 +14,10 @@ public class Student extends User{
         this.setUserId(id);
     };
 
+    public Student() {
+
+    }
+
     public String getBranchName() {
         return branchName;
     }
