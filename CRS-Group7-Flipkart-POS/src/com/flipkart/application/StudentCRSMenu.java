@@ -1,25 +1,19 @@
 package com.flipkart.application;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
-import com.flipkart.bean.Notification;
 import com.flipkart.bean.Grade;
 import com.flipkart.service.CourseCatalogueImpl;
-import com.flipkart.service.ProfessorInterface;
-import com.flipkart.service.ProfessorImpl;
 import com.flipkart.service.StudentImpl;
-
-import javax.swing.plaf.synth.SynthEditorPaneUI;
 
 public class StudentCRSMenu {
     Scanner sc = new Scanner(System.in);
     CourseCatalogueImpl courseCatalogue = null;
     StudentImpl studentImpl=new StudentImpl();
 
-    public void create_menu(String studentId, CourseCatalogueImpl courseCatalogue) {
+    public void createMenu(String studentId, CourseCatalogueImpl courseCatalogue) {
         this.courseCatalogue = courseCatalogue;
         while (CRSApplication.loggedin) {
             System.out.println("*****************************");

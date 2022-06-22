@@ -12,7 +12,10 @@ import java.util.Scanner;
 
 public class CRSApplication {
     UserImpl userImpl=new UserImpl();
-    StudentImpl studentImpl=new StudentImpl();
+    //StudentImpl studentImpl=new StudentImpl();
+    AdminCRSMenu adminCRSMenu=new AdminCRSMenu();
+    ProfessorCRSMenu professorCRSMenu = new ProfessorCRSMenu();
+    StudentCRSMenu studentCRSMenu = new StudentCRSMenu();
 
     CourseCatalogueImpl courseCatalogue = new CourseCatalogueImpl();
     static boolean loggedin = false;
@@ -56,28 +59,32 @@ public class CRSApplication {
         System.out.println("Password:");
         password=sc.next();
 
-        loggedin = userImpl.authenticate(userId,password);
+        loggedin=userImpl.authenticate(userId,password);
+//        loggedin=true;
 
         if(loggedin) {
             String role = userImpl.getRole(userId);
             switch (role) {
                 case "ADMIN":
-                    AdminCRSMenu adminCRSMenu=new AdminCRSMenu();
                     adminCRSMenu.createMenu();
-                case "PROFESSOR":
+                case PROFESSOR:
                     //call menu
-                case "STUDENT":
+                    professorCRSMenu.createMenu(userId, courseCatalogue);
+                case STUDENT:
+                    studentCRSMenu.createMenu(userId, courseCatalogue);
+                    /*
                     String studentId=studentImpl.getStudentId(userId);
                     boolean isApproved=studentImpl.isApproved(studentId);
 
                     if(isApproved){
                         StudentCRSMenu studentCRSMenu=new StudentCRSMenu();
-                        studentCRSMenu.create_menu(studentId, courseCatalogue);
+                        studentCRSMenu.createMenu(studentId, courseCatalogue);
                     }
                     else{
                         System.out.println("Failed to login, you have not been approved by the administration!");
                     }
                     break;
+                     */
             }
         }
         else {
