@@ -1,6 +1,7 @@
 package com.flipkart.application;
 
 import com.flipkart.constant.Role;
+import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.StudentImpl;
 import com.flipkart.service.UserImpl;
@@ -56,32 +57,38 @@ public class CRSApplication {
         System.out.println("Password:");
         password=sc.next();
 
-        loggedin = userImpl.authenticate(userId,password);
+        try {
+            loggedin = userImpl.authenticate(userId, password);
 
-        if(loggedin) {
-            String role = userImpl.getRole(userId);
-            switch (role) {
-                case "ADMIN":
-                    AdminCRSMenu adminCRSMenu=new AdminCRSMenu();
-                    adminCRSMenu.createMenu();
-                case "PROFESSOR":
-                    //call menu
-                case "STUDENT":
-                    String studentId=studentImpl.getStudentId(userId);
-                    boolean isApproved=studentImpl.isApproved(studentId);
+            if (loggedin) {
+                String role = userImpl.getRole(userId);
+                switch (role) {
+                    case "ADMIN":
+                        AdminCRSMenu adminCRSMenu = new AdminCRSMenu();
+                        adminCRSMenu.createMenu();
+                    case "PROFESSOR":
+                        //call menu
+                    case "STUDENT":
+                        String studentId = studentImpl.getStudentId(userId);
+                        boolean isApproved = studentImpl.isApproved(studentId);
 
-                    if(isApproved){
-                        StudentCRSMenu studentCRSMenu=new StudentCRSMenu();
-                        studentCRSMenu.createMenu(studentId, courseCatalogue);
-                    }
-                    else{
-                        System.out.println("Failed to login, you have not been approved by the administration!");
-                    }
-                    break;
+                        if (isApproved) {
+                            StudentCRSMenu studentCRSMenu = new StudentCRSMenu();
+                            studentCRSMenu.createMenu(studentId, courseCatalogue);
+                        } else {
+                            System.out.println("Failed to login, you have not been approved by the administration!");
+                        }
+                        break;
+                }
+            } else {
+                System.out.println("Invalid credentials");
+                throw new UserNotFoundException(userId);
             }
+        }catch(UserNotFoundException e){
+            System.out.println(e);
         }
-        else {
-            System.out.println("Invalid credentials");
+        finally{
+            System.out.println("User log in");
         }
     }
 
