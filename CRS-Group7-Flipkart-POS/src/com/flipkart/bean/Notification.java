@@ -4,10 +4,10 @@ import com.flipkart.constant.NotificationType;
 
 public class Notification {
 
-    private int notificationId;
-    private String message;
+    private int notificationId; // ID for a particular notification
+    private String message; // the message of the notification
 
-    private NotificationType notificationType;
+    private NotificationType notificationType; // type of notification
 
     public Notification(){}
 
@@ -15,6 +15,8 @@ public class Notification {
         this.notificationId = notificationId;
         this.message = message;
     }
+
+    // getters and setters of attributes
 
     public int getNotificationId() {
         return notificationId;

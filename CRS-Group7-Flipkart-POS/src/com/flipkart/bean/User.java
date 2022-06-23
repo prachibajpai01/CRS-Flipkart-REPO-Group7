@@ -2,14 +2,15 @@ package com.flipkart.bean;
 
 import com.flipkart.constant.Role;
 
+// base class for User which will be inherited by student, professor and admin.
 public class User {
-    private String userId;
-    private String password;
+    private String userId; // every user has a userId to identify them
+    private String password; // password to authenticate
 
-    private String userName;
-    private String address;
+    private String userName; // name of the user
+    private String address; // address of the user
 
-    private Role role;
+    private Role role; // role of user either student, professor or admin
 
     public User(){}
 
@@ -20,6 +21,7 @@ public class User {
         this.role = role;
     }
 
+    // getters and setters for all attributes
     public Role getRole() {
         return role;
     }

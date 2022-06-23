@@ -1,10 +1,11 @@
 package com.flipkart.bean;
 
+// student inherits from user
 public class Student extends User{
 
-    private String branchName;
-    private int batch;
-    private Boolean isApproved;
+    private String branchName; // branch of student
+    private int batch; // batch of student
+    private Boolean isApproved; // whether student is approved for semester
 
 
     public Student(String branchName, int batch,Boolean isApproved,String id){
@@ -14,6 +15,7 @@ public class Student extends User{
         this.setUserId(id);
     };
 
+    // getters and setters of various attributes
     public Student(){};
 
     public String getBranchName() {
