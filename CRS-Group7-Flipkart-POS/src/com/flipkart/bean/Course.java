@@ -5,6 +5,10 @@ public class Course {
     private String courseName;
     private String instructorId;
 
+    private Boolean isOffered;
+
+    private Boolean courseSeats;
+
     public Course(){
 
     };
