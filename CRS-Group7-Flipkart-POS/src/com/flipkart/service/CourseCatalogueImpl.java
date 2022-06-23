@@ -13,10 +13,17 @@ public class CourseCatalogueImpl implements CourseCatalogueInterface {
         }
     };// courseid, course object
 
+    /**
+     * Method to get enrolled students
+     * @param courseId : courseId of the course
+     */
     public Set<String> getEnrolledStudents(String courseId) {
         return enrolledStudents.get(courseId);
     }
 
+    /**
+     * Method to view all courses with their details
+     */
     @Override
     public ArrayList<Course> sendCatalogue() {
         ArrayList<Course> res=new ArrayList<Course>();
@@ -27,6 +34,10 @@ public class CourseCatalogueImpl implements CourseCatalogueInterface {
         return res;
     }
 
+    /**
+     * Method to enroll students
+     * @param studentId,courseId: studentId of the student,courseId of the course
+     */
     @Override
     public void enrollStudent(String studentId, String courseId){
         if(!enrolledStudents.containsKey(courseId)){
@@ -35,12 +46,20 @@ public class CourseCatalogueImpl implements CourseCatalogueInterface {
         enrolledStudents.get(courseId).add(studentId);
     }
 
+    /**
+     * Method to unenroll students
+     * @param studentId,courseId: studentId of the student,courseId of the course
+     */
     @Override
     public void unenrollStudent(String studentId, String courseId){
 
         enrolledStudents.get(courseId).remove(studentId);
     }
 
+    /**
+     * Method to add courses
+     * @param courseId,courseName,instructorId: courseId of the course,coursename of the course,instructorid
+     */
     @Override
     public void addCourse(String courseId, String courseName, String instructorId){
         Course newcourse = new Course();
@@ -50,6 +69,10 @@ public class CourseCatalogueImpl implements CourseCatalogueInterface {
         courseId2Object.put(courseId, newcourse);
     }
 
+    /**
+     * Method to getcoursedetails
+     * @param courseId: courseId of the course
+     */
     @Override
     public Course getCourseInfo(String courseId) {
         return courseId2Object.get(courseId);

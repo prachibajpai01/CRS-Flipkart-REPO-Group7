@@ -57,7 +57,7 @@ public class AdminImpl implements AdminInterface{
     }
 
     /**
-     * Method to view pending assignments
+     * Method to view pending admissions
      */
     @Override
     public List<Student> viewPendingAdmissions() {
