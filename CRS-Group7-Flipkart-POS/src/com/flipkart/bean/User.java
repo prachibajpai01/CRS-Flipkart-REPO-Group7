@@ -5,17 +5,18 @@ import com.flipkart.constant.Role;
 public class User {
     private String userId;
     private String password;
-    private String name;
+
+    private String userName;
     private String address;
 
     private Role role;
 
     public User(){}
 
-    public User(String userId,String password,String name,Role role){
+    public User(String userId,String password,String userName,Role role){
         this.userId = userId;
         this.password = password;
-        this.name = name;
+        this.userName = userName;
         this.role = role;
     }
 
@@ -44,11 +45,11 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.userName = name;
     }
 
     public String getAddress() {

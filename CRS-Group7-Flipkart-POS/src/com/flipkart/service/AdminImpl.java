@@ -5,10 +5,13 @@ import com.flipkart.bean.Notification;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.constant.NotificationType;
+import com.flipkart.dao.AdminDaoOperation;
 
 import java.util.*;
 
 public class AdminImpl implements AdminInterface{
+
+    AdminDaoOperation adminDaoOperation = new AdminDaoOperation();
 
     HashMap<String,Course> courseList = new HashMap<String,Course>(){{
         put("CSB101",new Course("CSB101","Java","1"));
@@ -43,16 +46,7 @@ public class AdminImpl implements AdminInterface{
 
     @Override
     public void addCourse(Course course) {
-        if(courseList.containsKey(course.getCourseId())){
-            System.out.println("Course already present in catalog");
-        }
-        try{
-            courseList.put(course.getCourseId(), course);
-            System.out.println("Course added successfully");
-
-        }catch (Exception e){
-            System.out.println("There was some error in adding course");
-        }
+        adminDaoOperation.addCourse(course);
     }
 
     @Override
@@ -88,15 +82,7 @@ public class AdminImpl implements AdminInterface{
 
     @Override
     public void addProfessor(Professor professor) {
-        if(!professorList.containsKey(professor.getUserId())){
-            System.out.println("Professor with same userid already present");
-        }
-        try{
-            System.out.println("Professor added successfully");
-            professorList.put(professor.getUserId(), professor);
-        }catch (Exception e){
-            System.out.println("There was some error in adding professor");
-        }
+        adminDaoOperation.addProfessor(professor);
     }
 
     @Override

@@ -129,8 +129,8 @@ public class AdminCRSMenu {
     }
 
     private void addProfessor() {
-        System.out.println("Enter Professor Name:");
-        String professorName = s.next();
+        System.out.println("Enter Username:");
+        String professorUserName = s.next();
 
         System.out.println("Enter Department:");
         String department = s.next();
@@ -146,7 +146,7 @@ public class AdminCRSMenu {
         System.out.println("Enter Password:");
         String password = s.next();
         professor.setPassword(password);
-        professor.setName(professorName);
+        professor.setName(professorUserName);
 
         System.out.println("Enter Address:");
         String address = s.next();
