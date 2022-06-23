@@ -29,7 +29,10 @@ public class AdminImpl implements AdminInterface{
         put("02",new Professor("Computer Science","Professor","02"));
     }};
 
-
+    /**
+     * Method to delete course
+     * @param courseCode : courseCode of the course
+     */
     @Override
     public void deleteCourse(String courseCode) {
         if(!courseList.containsKey(courseCode)){
@@ -44,11 +47,18 @@ public class AdminImpl implements AdminInterface{
         }
     }
 
+    /**
+     * Method to add course
+     * @param course : course object
+     */
     @Override
     public void addCourse(Course course) {
         adminDaoOperation.addCourse(course);
     }
 
+    /**
+     * Method to view pending assignments
+     */
     @Override
     public List<Student> viewPendingAdmissions() {
         List<Student> pendingStudents = new ArrayList<Student>();
@@ -64,6 +74,10 @@ public class AdminImpl implements AdminInterface{
         return pendingStudents;
     }
 
+    /**
+     * Method to approve student
+     * @param studentId : studentId of student
+     */
     @Override
     public void approveStudent(String studentId) {
         Student oldStudent = studentList.get(studentId);
@@ -80,11 +94,19 @@ public class AdminImpl implements AdminInterface{
         }
     }
 
+    /**
+     * Method to add professor
+     * @param professor : professor object
+     */
     @Override
     public void addProfessor(Professor professor) {
         adminDaoOperation.addProfessor(professor);
     }
 
+    /**
+     * Method to assign course
+     * @param courseCode,professorId : courseCode of course,professorId for professor
+     */
     @Override
     public void assignCourse(String courseCode, String professorId) {
         Course oldCourse = courseList.get(courseCode);
@@ -96,17 +118,27 @@ public class AdminImpl implements AdminInterface{
         }
     }
 
+    /**
+     * Method to view courses
+     */
     @Override
     public Collection<Course> viewCourses() {
         return courseList.values();
     }
 
+    /**
+     * Method to view professor
+     */
     @Override
     public List<Professor> viewProfessors() {
         List<Professor> professors = new ArrayList<>(professorList.values());
         return professors;
     }
 
+    /**
+     * Method to send notifications
+     * @param studentId,Notification : studentId of student,Notification object
+     */
     @Override
     public void sendNotification(String studentId,Notification notification) {
 
