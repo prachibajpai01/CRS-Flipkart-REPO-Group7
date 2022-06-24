@@ -30,7 +30,25 @@ public class Course {
      * Number of seats available
      */
 
-    private Boolean courseSeats;
+    private int courseSeats;
+
+    public Boolean getOffered() {
+        return isOffered;
+    }
+
+    public void setOffered(Boolean offered) {
+        isOffered = offered;
+    }
+
+    public int getCourseSeats() {
+        return courseSeats;
+    }
+
+    public void setCourseSeats(int courseSeats) {
+        this.courseSeats = courseSeats;
+    }
+
+
 
     /**
      * Basic course constructor without any details

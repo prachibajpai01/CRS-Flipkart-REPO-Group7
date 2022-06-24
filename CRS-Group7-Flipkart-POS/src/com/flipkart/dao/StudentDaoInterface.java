@@ -5,6 +5,7 @@ import com.flipkart.bean.GradeCard;
 import com.flipkart.bean.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface StudentDaoInterface {
 
@@ -13,7 +14,7 @@ public interface StudentDaoInterface {
     public boolean isApproved(String studentId);
     public void addCourse(String userId, String courseId);
     public void dropCourse(String userId, String courseId);
-    public ArrayList<Course> viewCourseList();
+    public List<Course> viewCourseList(String studentId);
     public void viewRegisteredCourses(String userId);
     public GradeCard viewGradeCard(int studentId);
 
