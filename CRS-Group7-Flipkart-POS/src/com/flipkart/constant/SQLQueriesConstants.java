@@ -30,4 +30,8 @@ public class SQLQueriesConstants {
 
     public static final String REGISTER_STUDENT = "Insert into student (userId,branch,approved) values(?,?,?)";
 
+    public static final String VIEW_AVAILABLE_COURSES = "SELECT * FROM course WHERE cCode NOT IN  (SELECT courseCode  FROM registered_courses WHERE studentId = ?) AND course.isOffered = ?";
+
+    public static final String VIEW_GRADE_CARD = "SELECT * FROM registered_courses WHERE studentId = ?";
+
 }

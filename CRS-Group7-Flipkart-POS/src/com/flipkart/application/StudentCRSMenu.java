@@ -4,11 +4,8 @@ import java.util.*;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
-import com.flipkart.bean.EnrolledStudent;
-import com.flipkart.bean.GradeCard;
 import com.flipkart.service.AdminImpl;
 import com.flipkart.service.AdminInterface;
-import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.StudentImpl;
 
 /**
@@ -21,10 +18,7 @@ public class StudentCRSMenu {
      */
     Scanner sc = new Scanner(System.in);
 
-    /**
-     * Course catalogue service instance
-     */
-    CourseCatalogueImpl courseCatalogue = null;
+
 
     /**
      * Student service instance
@@ -35,10 +29,8 @@ public class StudentCRSMenu {
     /**
      * Create CRS menu for student
      * @param studentId ID of student
-     * @param courseCatalogue Catalogue of courses to interact with courses.
      */
-    public void createMenu(String studentId, CourseCatalogueImpl courseCatalogue) {
-        this.courseCatalogue = courseCatalogue;
+    public void createMenu(String studentId) {
         while (CRSApplication.loggedin) {
             System.out.println("*****************************");
             System.out.println("**********Student Menu*********");
@@ -96,7 +88,7 @@ public class StudentCRSMenu {
 
         System.out.println("Enter course id to add :");
         String newcourseid=sc.nextLine();
-        studentImpl.addCourse(studentId,newcourseid,courseCatalogue);
+
     }
 
     /**
@@ -111,7 +103,6 @@ public class StudentCRSMenu {
 
             System.out.println("Enter the Course Code : ");
             String courseCode = sc.next();
-            studentImpl.dropCourse(studentId,courseCode,courseCatalogue);
     }
 
     /**
@@ -120,21 +111,8 @@ public class StudentCRSMenu {
      * @return ArrayList of available courses.
      */
     private ArrayList<Course> viewCourse(String studentId) {
-        ArrayList<Course> course_available = courseCatalogue.sendCatalogue();
 
-        if (course_available.isEmpty()) {
-            System.out.println("NO COURSE AVAILABLE");
-            return new ArrayList<>();
-        }
-
-
-
-        System.out.println(String.format("%-20s %-20s %-20s", "COURSE CODE", "COURSE NAME", "INSTRUCTOR"));
-
-        for (Course obj : course_available) {
-            System.out.println(String.format("%-20s %-20s %-20s", obj.getCourseId(), obj.getCourseName(), obj.getInstructorId()));
-        }
-        return course_available;
+        return null;
     }
 
     /**

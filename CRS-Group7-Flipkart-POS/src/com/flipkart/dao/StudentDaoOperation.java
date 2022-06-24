@@ -7,8 +7,10 @@ import com.flipkart.constant.SQLQueriesConstants;
 import com.flipkart.utils.DatabaseUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentDaoOperation implements StudentDaoInterface {
 
@@ -73,8 +75,32 @@ public class StudentDaoOperation implements StudentDaoInterface {
     }
 
     @Override
-    public ArrayList<Course> viewCourseList() {
-        return null;
+    public List<Course> viewCourseList(String studentId) {
+        Connection connection = DatabaseUtil.getConnection();
+
+        List<Course> courseList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLQueriesConstants.VIEW_AVAILABLE_COURSES);
+            preparedStatement.setString(1,studentId);
+            preparedStatement.setBoolean(2,true); // is offered
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                Course course = new Course();
+                course.setCourseSeats(resultSet.getInt("courseSeats"));
+                course.setCourseName(resultSet.getString("cName"));
+                course.setCourseId(resultSet.getString("cCode"));
+                course.setInstructorId(resultSet.getString("instructor"));
+                course.setOffered(resultSet.getBoolean("isOffered"));
+                courseList.add(course);
+            }
+
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        return courseList;
     }
 
     @Override

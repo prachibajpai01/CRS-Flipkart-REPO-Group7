@@ -2,7 +2,6 @@ package com.flipkart.service;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.GradeCard;
-import com.flipkart.bean.Student;
 import com.flipkart.dao.StudentDaoInterface;
 import com.flipkart.dao.StudentDaoOperation;
 
@@ -42,7 +41,7 @@ public class StudentImpl implements StudentInterface{
      * @param userId,courseId,courseCatalogue: studentId of the student,courseId of the course,CourseCatalogueImpl instance
      */
     @Override
-    public void addCourse(String userId,String courseId, CourseCatalogueImpl courseCatalogue) {
+    public void addCourse(String userId,String courseId) {
 //        if(!studentCourseData.containsKey(userId)){
 //            studentCourseData.put(userId, new HashSet<>());
 //        }
@@ -57,19 +56,19 @@ public class StudentImpl implements StudentInterface{
      * @param userId,courseId,courseCatalogue: studentId of the student,courseId of the course,CourseCatalogueImpl instance
      */
     @Override
-    public void dropCourse(String userId,String courseId, CourseCatalogueImpl courseCatalogue) {
+    public void dropCourse(String userId,String courseId) {
 //        studentCourseData.get(userId).remove(courseId);
 //        courseCatalogue.unenrollStudent(userId, courseId);
     }
 
     /**
-     * Method to view all courses
-     * @param courseCatalogue: CourseCatalogueImpl instance
+     * Method to view all available courses
+     * @param studentId:
      */
     @Override
-    public ArrayList<Course> viewCourseList(CourseCatalogueImpl courseCatalogue) {
-        System.out.println("Viewing list of courses...");
-        return courseCatalogue.sendCatalogue();
+    public List<Course> viewAvailableCourseList(String studentId) {
+
+        return studentDaoInterface.viewCourseList(studentId);
     }
 
     /**

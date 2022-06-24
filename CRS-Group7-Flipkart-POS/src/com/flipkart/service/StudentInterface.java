@@ -30,19 +30,19 @@ public interface StudentInterface {
      * Method to add course
      * @param userId,courseId,courseCatalogue: studentId of the student,courseId of the course,CourseCatalogueImpl instance
      */
-    public void addCourse(String userId,String courseId, CourseCatalogueImpl courseCatalogue);
+    public void addCourse(String userId,String courseId);
 
     /**
      * Method to drop course
      * @param userId,courseId,courseCatalogue: studentId of the student,courseId of the course,CourseCatalogueImpl instance
      */
-    public void dropCourse(String userId,String courseId, CourseCatalogueImpl courseCatalogue);
+    public void dropCourse(String userId,String courseId);
 
     /**
      * Method to view all courses
-     * @param courseCatalogue: CourseCatalogueImpl instance
+     * @param studentId : id of the student
      */
-    public ArrayList<Course> viewCourseList(CourseCatalogueImpl courseCatalogue);
+    public List<Course> viewAvailableCourseList(String studentId);
 
     /**
      * Method to view student registered courses
