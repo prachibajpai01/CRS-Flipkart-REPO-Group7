@@ -1,13 +1,11 @@
 package com.flipkart.application;
 
-import com.flipkart.bean.Course;
-import com.flipkart.bean.Notification;
-import com.flipkart.bean.Professor;
-import com.flipkart.bean.Student;
+import com.flipkart.bean.*;
 import com.flipkart.constant.Role;
 import com.flipkart.service.AdminImpl;
 import com.flipkart.service.AdminInterface;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,8 +24,9 @@ public class AdminCRSMenu {
             System.out.println("3. Approve registration");
             System.out.println("4. Add Professor");
             System.out.println("5. Assign Course to Professor");
-            System.out.println("6. View pending fee status");
-            System.out.println("7. Logout");
+            System.out.println("6. View pending students");
+            System.out.println("7. Generate report card");
+            System.out.println("8. Logout");
             System.out.println("*****************************");
 
             int choice = s.nextInt();
@@ -58,6 +57,10 @@ public class AdminCRSMenu {
                     break;
 
                 case 7:
+                    generateGradeCard();
+                    break;
+
+                case 8:
                     CRSApplication.loggedin = false;
                     return;
 
@@ -109,8 +112,14 @@ public class AdminCRSMenu {
      * Method to approve a Student using Student's ID
      */
     private void approveStudent() {
+        List<Student> studentList = viewPendingAdmissions();
+        if (studentList.size() == 0) {
+            return;
+        }
+        System.out.println("Enter Student's ID:");
+        String studentUserId = s.next();
 
-
+        adminImpl.approveStudent(studentUserId);
     }
 
     private void addProfessor() {
@@ -220,6 +229,27 @@ public class AdminCRSMenu {
             System.out.println(String.format("%20s | %20s | %20s", course.getCourseId(), course.getCourseName(), course.getInstructorId()));
         }
         return courseList;
+    }
+
+    private void generateGradeCard(){
+        System.out.println("*************************** Grade Card *************************** ");
+        System.out.println("Enter the student username :");
+
+        String studentId = s.next();
+
+        List<EnrolledStudent> grades = adminImpl.generateGradeCard(studentId);
+
+        if(grades.size() == 0) {
+           System.out.println("Student enrolled in none of the courses!");
+        }
+        System.out.println(String.format("%20s | %20s" ,"Student Id","Semester"));
+        System.out.println(String.format("%20s | %20s ",grades.get(0).getStudentId(), grades.get(0).getSem()));
+
+
+        System.out.println(String.format("%20s | %20s | %20s ", "StudentId", "Semester", "Name"));
+        for(EnrolledStudent course : grades) {
+            System.out.println(String.format("%20s | %20s ", course.getCourseCode(),course.getGrade()));
+        }
     }
 
 
