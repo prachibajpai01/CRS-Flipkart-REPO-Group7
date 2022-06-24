@@ -130,9 +130,10 @@ public class StudentCRSMenu {
      * @param studentId ID of student
      * @return ArrayList of available courses.
      */
-    private ArrayList<Course> viewCourse(String studentId) {
+    }
+    private List<Course> viewCourse(String studentId) {
 
-        return null;
+        return studentImpl.viewAvailableCourseList(studentId);
     }
 
     /**
