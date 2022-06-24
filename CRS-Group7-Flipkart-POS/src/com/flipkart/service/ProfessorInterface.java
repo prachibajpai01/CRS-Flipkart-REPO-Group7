@@ -25,10 +25,4 @@ public interface ProfessorInterface {
      * @param profId,courseCatalogue: professorId of the professor,CourseCatalogueImpl instance
      */
     public ArrayList<Course> getCourses(String profId);
-
-    /**
-     * Method to get professorId
-     * @param profId,: professorId of the professor
-     */
-    public String getProfessorById(String profId);
 }

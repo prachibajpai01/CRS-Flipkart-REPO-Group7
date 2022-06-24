@@ -97,21 +97,22 @@ public class CRSApplication {
             if (loggedin) {
                 displayCurrentDateTime();
                 String role = userImpl.getRole(userId);
+                role = role.toUpperCase();
                 switch (role) {
                     case "ADMIN":
                         AdminCRSMenu adminCRSMenu = new AdminCRSMenu();
                         adminCRSMenu.createMenu();
+                        break;
                     case "PROFESSOR":
-                        String profId = professorImpl.getProfessorById(userId);
                         ProfessorCRSMenu professorCRSMenu = new ProfessorCRSMenu();
-                        professorCRSMenu.createMenu(profId);
+                        professorCRSMenu.createMenu(userId);
+                        break;
                     case "STUDENT":
-                        String studentId = studentImpl.getStudentId(userId);
-                        boolean isApproved = studentImpl.isApproved(studentId);
+                        boolean isApproved = studentImpl.isApproved(userId);
 
                         if (isApproved) {
                             StudentCRSMenu studentCRSMenu = new StudentCRSMenu();
-                            studentCRSMenu.createMenu(studentId);
+                            studentCRSMenu.createMenu(userId);
                         } else {
                             System.out.println("Failed to login, you have not been approved by the administration!");
                         }

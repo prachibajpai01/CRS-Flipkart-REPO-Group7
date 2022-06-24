@@ -24,17 +24,13 @@ public class ProfessorCRSMenu {
      */
     ProfessorImpl professorImpl=new ProfessorImpl();
 
-    /**
-     * Whether a professor is logged in or not
-     */
-    Boolean isLoggedIn=true;
 
     public void createMenu(String profId) {
         /**
          * Create CRS menu for professor with various options.
          * @param profId ID of professor
          */
-            while (isLoggedIn) {
+            while (CRSApplication.loggedin) {
                 System.out.println("*****************************");
                 System.out.println("**********Professor Menu*********");
                 System.out.println("*****************************");

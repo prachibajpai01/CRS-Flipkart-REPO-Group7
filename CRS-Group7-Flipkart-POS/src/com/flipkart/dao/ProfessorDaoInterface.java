@@ -16,5 +16,4 @@ public interface ProfessorDaoInterface {
 
     public ArrayList<Course> getCourses(String profId);
 
-    public String getProfessorById(String profId);
 }

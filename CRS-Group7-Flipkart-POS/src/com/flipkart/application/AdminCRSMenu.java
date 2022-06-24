@@ -182,9 +182,9 @@ public class AdminCRSMenu {
     private void assignCourseToProfessor() {
         List<Professor> professorList= adminImpl.viewProfessors();
         System.out.println("*************************** Professor *************************** ");
-        System.out.println(String.format("%20s | %20s | %20s ", "ProfessorId", "Name", "Designation"));
+        System.out.println(String.format("%20s | %20s ", "ProfessorId", "Designation"));
         for(Professor professor : professorList) {
-            System.out.println(String.format("%20s | %20s | %20s ", professor.getUserId(), professor.getUserName(), professor.getDesignation()));
+            System.out.println(String.format("%20s | %20s ", professor.getUserId(), professor.getDesignation()));
         }
 
 

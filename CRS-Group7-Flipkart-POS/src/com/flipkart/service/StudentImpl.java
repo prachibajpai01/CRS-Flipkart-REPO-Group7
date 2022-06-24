@@ -1,6 +1,7 @@
 package com.flipkart.service;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.EnrolledStudent;
 import com.flipkart.bean.GradeCard;
 import com.flipkart.dao.StudentDaoInterface;
 import com.flipkart.dao.StudentDaoOperation;
@@ -86,8 +87,7 @@ public class StudentImpl implements StudentInterface{
      * @param studentId: studentId of the student
      */
     @Override
-    public List<GradeCard> viewGradeCard(int studentId) {
-        System.out.println("Viewing grade card...");
-        return null;
+    public List<EnrolledStudent> viewGradeCard(String studentId) {
+        return studentDaoInterface.viewGradeCard(studentId);
     }
 }

@@ -1,9 +1,7 @@
 package com.flipkart.service;
 
 import com.flipkart.bean.Course;
-import com.flipkart.bean.GradeCard;
-
-import java.util.ArrayList;
+import com.flipkart.bean.EnrolledStudent;
 import java.util.List;
 
 public interface StudentInterface {
@@ -54,5 +52,5 @@ public interface StudentInterface {
      * Method to view grade of student
      * @param studentId: studentId of the student
      */
-    public List<GradeCard> viewGradeCard(int studentId);
+    public List<EnrolledStudent> viewGradeCard(String studentId);
 }

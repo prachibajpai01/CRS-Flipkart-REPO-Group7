@@ -2,7 +2,6 @@ package com.flipkart.service;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.EnrolledStudent;
-import com.flipkart.bean.Professor;
 import com.flipkart.dao.ProfessorDaoOperation;
 import com.flipkart.dao.ProfessorDaoInterface;
 
@@ -53,12 +52,4 @@ public class ProfessorImpl implements ProfessorInterface {
             return  professorDaoInterface.getCourses(profId);
     }
 
-    /**
-     * Method to get professorId
-     * @param profId,: professorId of the professor
-     */
-    @Override
-    public String getProfessorById(String profId) {
-        return professorDaoInterface.getProfessorById(profId);
-    }
 }

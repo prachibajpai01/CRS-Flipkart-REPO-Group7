@@ -109,8 +109,26 @@ public class StudentDaoOperation implements StudentDaoInterface {
     }
 
     @Override
-    public GradeCard viewGradeCard(int studentId) {
-        return null;
+    public List<EnrolledStudent> viewGradeCard(String studentId) {
+        List<EnrolledStudent> registeredCourses = new ArrayList<EnrolledStudent>();
+        Connection conn = DatabaseUtil.getConnection();
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(SQLQueriesConstants.VIEW_GRADE_CARD);
+
+            preparedStatement.setString(1, studentId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                registeredCourses.add(new EnrolledStudent(resultSet.getString("courseCode"),
+                        resultSet.getString("studentId"), resultSet.getInt("semester"), resultSet.getString("grade")));
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("SQL Exception Thrown : " + ex.getMessage());
+        }
+
+        return registeredCourses;
     }
 
     public void addUser(User user) {

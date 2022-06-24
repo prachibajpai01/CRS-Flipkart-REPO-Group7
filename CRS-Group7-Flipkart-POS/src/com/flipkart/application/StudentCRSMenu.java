@@ -4,8 +4,7 @@ import java.util.*;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
-import com.flipkart.service.AdminImpl;
-import com.flipkart.service.AdminInterface;
+import com.flipkart.bean.EnrolledStudent;
 import com.flipkart.service.StudentImpl;
 
 /**
@@ -24,7 +23,6 @@ public class StudentCRSMenu {
      * Student service instance
      */
     StudentImpl studentImpl=new StudentImpl();
-    AdminInterface adminImpl = new AdminImpl();
 
     /**
      * Create CRS menu for student
@@ -65,7 +63,7 @@ public class StudentCRSMenu {
                     break;
 
                 case 5:
-                    //viewGradeCard(studentId);
+                    viewGradeCard(studentId);
                     break;
 
                 case 6:
@@ -129,20 +127,22 @@ public class StudentCRSMenu {
      * Display grade card of student
      * @param studentId ID of student
      */
-    /*private void viewGradeCard(String studentId) {
+    private void viewGradeCard(String studentId) {
 
+        try {
+            List<EnrolledStudent> registeredCourses = new ArrayList<EnrolledStudent>();
+            registeredCourses = studentImpl.viewGradeCard(studentId);
 
-        List<EnrolledStudent> grade_card = adminImpl.generateGradeCard(studentId);
-        System.out.println(String.format("%-20s %-20s %-20s", "COURSE ID", "GRADE"));
+            System.out.println("Student Username: " + studentId);
+            System.out.println(String.format("%30s %30s %30s", "Course Code", "Semester", "Grade"));
 
-        if (grade_card.isEmpty()) {
-            System.out.println("You haven't registered for any course");
-            return;
+            for (EnrolledStudent rc : registeredCourses) {
+                System.out
+                        .println(String.format("%30s %30s %30s", rc.getCourseCode(), rc.getSem(), rc.getGrade()));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
         }
-
-        for (EnrolledStudent obj : grade_card) {
-            System.out.println(String.format("%-20s %-20s %-20s", obj.getCourseCode(), obj.getGrade()));
-        }
-    }*/
+    }
 
 }

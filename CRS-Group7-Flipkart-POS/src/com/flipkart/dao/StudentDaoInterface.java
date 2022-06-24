@@ -1,10 +1,8 @@
 package com.flipkart.dao;
 
 import com.flipkart.bean.Course;
-import com.flipkart.bean.GradeCard;
+import com.flipkart.bean.EnrolledStudent;
 import com.flipkart.bean.User;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public interface StudentDaoInterface {
@@ -16,7 +14,7 @@ public interface StudentDaoInterface {
     public void dropCourse(String userId, String courseId);
     public List<Course> viewCourseList(String studentId);
     public void viewRegisteredCourses(String userId);
-    public GradeCard viewGradeCard(int studentId);
+    public List<EnrolledStudent> viewGradeCard(String studentId);
 
     public void addUser(User user);
 

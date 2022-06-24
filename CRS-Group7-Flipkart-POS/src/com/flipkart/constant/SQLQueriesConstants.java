@@ -34,4 +34,12 @@ public class SQLQueriesConstants {
 
     public static final String VIEW_GRADE_CARD = "SELECT * FROM registered_courses WHERE studentId = ?";
 
+
+    // professor queries
+
+    public static final String ADD_GRADE = "update registered_courses set grade = ? where courseCode = ? and studentId=?";
+
+    public static final String VIEW_ENROLLED_STUDENTS = "Select course.cCode,course.cName,registered_courses.studentId, registered_courses.semester from course inner join registered_courses on course.cCode = registered_courses.courseCode where course.instructor = ? ";
+
+    public static final String VIEW_ASSIGNED_COURSES = "select cCode,cName, instructor  from course where instructor = ?";
 }
