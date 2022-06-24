@@ -3,10 +3,20 @@ package com.flipkart.exception;
 public class GradeNotAddedException extends Exception {
     String studentId,courseId;
 
+    /**
+     * Constructor
+     * @param studentId : student Id
+     * @param courseId: course Id
+     */
+
     public GradeNotAddedException(String studentId, String courseId) {
         this.studentId = studentId;
         this.courseId = courseId;
     }
+
+    /**
+     * Message to be thrown
+     */
 
     @Override
     public String getMessage(){
