@@ -7,9 +7,9 @@ public class DatabaseUtil {
     public static Connection connection = null;
 
     final static String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    final static String DB_URL = "jdbc:mysql://localhost/CRSDatabase";
+    final static String DB_URL = "jdbc:mysql://localhost/CRSDB";
     final static String USER = "root";
-    final static String PASS = "Blue_176413";
+    final static String PASS = "flipkart";
 
     public static Connection getConnection() {
         if(connection != null)

@@ -7,10 +7,17 @@ import com.flipkart.constant.NotificationType;
  */
 public class Notification {
 
+    public Notification(String notificationId,String message,String studentId,String referenceId){
+        this.notificationId = notificationId;
+        this.message = message;
+        this.studentId = studentId;
+        this.referenceId = referenceId;
+    };
+
     /**
      * ID for notification
      */
-    private int notificationId;
+    private String notificationId;
 
     /**
      * message in the notification
@@ -18,9 +25,67 @@ public class Notification {
     private String message;
 
     /**
-     * type of notification
+     * Student ID for notification
      */
-    private NotificationType notificationType;
+    private String studentId;
+
+    /**
+     * reference ID for notification
+     */
+    private String referenceId;
+
+    /**
+     * Notification Id getter
+     * @return Notification Id
+     */
+
+    public String getNotificationId() {
+        return notificationId;
+    }
+
+    /**
+     * Notification Id setter
+     * @param  notificationId
+     */
+
+    public void setNotificationId(String notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    /**
+     * Student Id getter
+     * @return  studentId
+     */
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    /**
+     * Student Id setter
+     * @param  studentId
+     */
+
+    public void setStudentId(String studentId) {
+        this.studentId = studentId;
+    }
+
+    /**
+     * Reference Id getter
+     * @return  referenceId
+     */
+    public String getReferenceId() {
+        return referenceId;
+    }
+
+    /**
+     * Reference Id setter
+     * @param  referenceId
+     */
+    public void setReferenceId(String referenceId) {
+        this.referenceId = referenceId;
+    }
+
 
     /**
      * Notification constructor
@@ -33,27 +98,10 @@ public class Notification {
      * @param message message for notification
      */
     public Notification(int notificationId,String message){
-        this.notificationId = notificationId;
-        this.message = message;
+
     }
 
-    /**
-     * Notification Id getter
-     * @return Notification Id
-     */
 
-    public int getNotificationId() {
-        return notificationId;
-    }
-
-    /**
-     * Notification Id setter
-     * @param notificationId set notification ID
-     */
-
-    public void setNotificationId(int notificationId) {
-        this.notificationId = notificationId;
-    }
 
     /**
      * Message Getter
@@ -78,17 +126,5 @@ public class Notification {
      * @return notification type
      */
 
-    public NotificationType getNotificationType() {
-        return notificationType;
-    }
-
-    /**
-     * Notification Type Setter
-     * @param notificationType set notification type
-     */
-
-    public void setNotificationType(NotificationType notificationType) {
-        this.notificationType = notificationType;
-    }
 
 }

@@ -4,6 +4,8 @@ import com.flipkart.bean.*;
 import com.flipkart.constant.Role;
 import com.flipkart.service.AdminImpl;
 import com.flipkart.service.AdminInterface;
+import com.flipkart.service.NotificationImpl;
+import com.flipkart.service.NotificationInterface;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -129,6 +131,7 @@ public class AdminCRSMenu {
      * Method to approve a Student using Student's ID
      */
     private void approveStudent() {
+        NotificationInterface notificationInterface = new NotificationImpl();
         List<Student> studentList = viewPendingAdmissions();
         if (studentList.size() == 0) {
             return;
@@ -136,7 +139,20 @@ public class AdminCRSMenu {
         System.out.println("Enter Student's ID:");
         String studentUserId = s.next();
 
-        adminImpl.approveStudent(studentUserId);
+        try {
+            adminImpl.approveStudent(studentUserId);
+
+            //payment
+            String refId = notificationInterface.addPayment(studentUserId, 1000, false, null);
+            System.out.println(refId + "Done ");
+            //Send Notification
+            String message = "Fee payment pending";
+            notificationInterface.sendNotification(message, studentUserId, refId);
+
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**

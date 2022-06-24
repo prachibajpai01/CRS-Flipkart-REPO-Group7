@@ -51,4 +51,17 @@ public class SQLQueriesConstants {
 
     public static final String VIEW_ASSIGNED_COURSES = "select cCode,cName, instructor  from course where instructor = ?";
 
+    // notification
+    public static final String INSERT_NOTIFICATION = "INSERT INTO notification(notificationId,message,studentId,referenceId) VALUES(?,?,?,?)";
+
+    public static final String GET_REFERENCE_ID = "SELECT * FROM notification WHERE notificationId=?";
+
+    public static final String GET_ALL_NOTIFICATIONS = "SELECT * FROM notification WHERE studentId=?";
+
+    public static final String INSERT_PAYMENT = "INSERT INTO payment(referenceId,studentId,amount,status,paymentType) VALUES(?,?,?,?,?)";
+
+    public static final String UPDATE_PAYMENT = "UPDATE payment SET status = 1, paymentType = ? WHERE status = 0 AND studentId = ?";
+    public static final String GET_REFID_PAYMENT = "SELECT referenceId FROM payment WHERE status = 0 AND studentId = ?";
+
+
 }
