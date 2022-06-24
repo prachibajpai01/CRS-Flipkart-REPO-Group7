@@ -1,24 +1,42 @@
 package com.flipkart.application;
 
-import com.flipkart.constant.Role;
 import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.StudentImpl;
 import com.flipkart.service.UserImpl;
 import com.flipkart.service.ProfessorImpl;
 
-import java.util.HashMap;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 
-
+/**
+ * Class for CRS application implementation and start point.
+ */
 public class CRSApplication {
+
+    /**
+     * User service instance
+     */
     UserImpl userImpl=new UserImpl();
+
+    /**
+     * Student service instance
+     */
     StudentImpl studentImpl=new StudentImpl();
     ProfessorImpl professorImpl = new ProfessorImpl();
+
+    /**
+     * Course catalogue service to interact with courses.
+     */
     CourseCatalogueImpl courseCatalogue = new CourseCatalogueImpl();
     static boolean loggedin = false;
 
+    /**
+     * Execution of CRS Application starts here.
+     * @param args any command line string srguments
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         CRSApplication crsApplication = new CRSApplication();
@@ -50,10 +68,29 @@ public class CRSApplication {
             }
         }while(userInput!=4);
     }
+
+    /**
+     * Display current date and time.
+     */
+    private static void displayCurrentDateTime() {
+
+        // Date currentDate = new Date();
+        LocalDate localDate = LocalDate.now();
+        LocalTime localTime = LocalTime.now();
+
+
+        //System.out.println("Current Date and Time - Before Java 8 : " + currentDate);
+        System.out.println("Current Date - From Java 8 : " + localDate);
+        System.out.println("Current Time - From Java 8 : " + localTime);
+    }
+
+    /**
+     * Login the user by taking user ID and password.
+     */
     public void loginUser() {
         Scanner sc=new Scanner(System.in);
         String userId,password;
-        System.out.println("Userid:");
+        System.out.println("User Name:");
         userId=sc.next();
         System.out.println("Password:");
         password=sc.next();
@@ -62,6 +99,7 @@ public class CRSApplication {
             loggedin = userImpl.authenticate(userId, password);
 
             if (loggedin) {
+                displayCurrentDateTime();
                 String role = userImpl.getRole(userId);
                 switch (role) {
                     case "ADMIN":
@@ -95,6 +133,9 @@ public class CRSApplication {
         }
     }
 
+    /**
+     * Register student for semester by taking details.
+     */
     public void registerStudent() {
         Scanner sc=new Scanner(System.in);
         String userId,name,password,address,branch;
@@ -109,18 +150,23 @@ public class CRSApplication {
         System.out.println("Batch:");
         batch=sc.nextInt();
         System.out.println("Branch:");
-        branch=sc.nextLine();
-        sc.nextLine();
+        branch=sc.next();
+        //sc.nextLine();
         System.out.println("Address:");
-        address=sc.nextLine();
+        address=sc.next();
+
+        studentImpl.register(name,userId,password,batch,branch,address);
 
 //        int studentId=studentImpl.register(name,userId,password,batch,branch,address);
     }
 
+    /**
+     * Update password of user.
+     */
     public void updatePassword() {
         Scanner sc=new Scanner(System.in);
         String userId,newPassword;
-        System.out.println("Email");
+        System.out.println("Username:");
         userId=sc.next();
         System.out.println("New Password:");
         newPassword=sc.next();

@@ -1,25 +1,22 @@
 package com.flipkart.service;
 
 import com.flipkart.bean.Course;
-import com.flipkart.bean.Grade;
+import com.flipkart.bean.GradeCard;
 import com.flipkart.bean.Student;
+import com.flipkart.dao.StudentDaoInterface;
+import com.flipkart.dao.StudentDaoOperation;
 
 import java.util.*;
 
 public class StudentImpl implements StudentInterface{
+
+    StudentDaoInterface studentDaoInterface = new StudentDaoOperation();
     //userId,all courses w.r.t student
 
     @Override
-    public int register(String name,String userId,String password,int batch,String branch,String address){
-        Student stu=new Student();
-        stu.setName(name);
-        stu.setUserId(userId);
-        stu.setPassword(password);
-        stu.setBatch(batch);
-        stu.setBranchName(branch);
-        stu.setAddress(address);
-//        studentObject.put(userId,stu);
-        return 0;
+    public void register(String name,String userId,String password,int batch,String branch,String address){
+        System.out.println("hhhhhh"+branch);
+        studentDaoInterface.register(name, userId, password, batch, branch, address);
     }
 
     /**
@@ -90,7 +87,7 @@ public class StudentImpl implements StudentInterface{
      * @param studentId: studentId of the student
      */
     @Override
-    public List<Grade> viewGradeCard(int studentId) {
+    public List<GradeCard> viewGradeCard(int studentId) {
         System.out.println("Viewing grade card...");
         return null;
     }

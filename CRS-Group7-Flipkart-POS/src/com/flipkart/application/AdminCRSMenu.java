@@ -1,22 +1,34 @@
 package com.flipkart.application;
 
-import com.flipkart.bean.Course;
-import com.flipkart.bean.Notification;
-import com.flipkart.bean.Professor;
-import com.flipkart.bean.Student;
+import com.flipkart.bean.*;
 import com.flipkart.constant.Role;
 import com.flipkart.service.AdminImpl;
 import com.flipkart.service.AdminInterface;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class for Admin CRS menu
+ */
 public class AdminCRSMenu {
 
+    /**
+     * Scanner to take user input
+     */
     Scanner s = new Scanner(System.in);
+
+    /**
+     * Admin service instance
+     */
     AdminInterface adminImpl = new AdminImpl();
+
+    /**
+     * Display menu with various options for admin
+     */
     public void createMenu(){
         while(CRSApplication.loggedin){
             System.out.println("*****************************");
@@ -26,8 +38,9 @@ public class AdminCRSMenu {
             System.out.println("3. Approve registration");
             System.out.println("4. Add Professor");
             System.out.println("5. Assign Course to Professor");
-            System.out.println("6. View pending fee status");
-            System.out.println("7. Logout");
+            System.out.println("6. View pending students");
+            System.out.println("7. Generate report card");
+            System.out.println("8. Logout");
             System.out.println("*****************************");
 
             int choice = s.nextInt();
@@ -58,6 +71,10 @@ public class AdminCRSMenu {
                     break;
 
                 case 7:
+                    generateGradeCard();
+                    break;
+
+                case 8:
                     CRSApplication.loggedin = false;
                     return;
 
@@ -69,6 +86,9 @@ public class AdminCRSMenu {
     }
 
 
+    /**
+     * Admin can add course with a course code and name to catalogue.
+     */
     private void addCourseToCatalogue() {
         List<Course> courseList = viewCoursesInCatalogue();
 
@@ -109,25 +129,19 @@ public class AdminCRSMenu {
      * Method to approve a Student using Student's ID
      */
     private void approveStudent() {
-
         List<Student> studentList = viewPendingAdmissions();
-        if(studentList.size() == 0) {
+        if (studentList.size() == 0) {
             return;
         }
-
         System.out.println("Enter Student's ID:");
-        String studentUserIdApproval = s.next();
+        String studentUserId = s.next();
 
-        try {
-            adminImpl.approveStudent(studentUserIdApproval);
-            //send notification from system
-            adminImpl.sendNotification(studentUserIdApproval,new Notification());
-
-        } catch (Exception e) {
-            System.out.println("Cannot approve registration");
-        }
+        adminImpl.approveStudent(studentUserId);
     }
 
+    /**
+     * Admin can add a professor with their details.
+     */
     private void addProfessor() {
         System.out.println("Enter Username:");
         String professorUserName = s.next();
@@ -146,7 +160,7 @@ public class AdminCRSMenu {
         System.out.println("Enter Password:");
         String password = s.next();
         professor.setPassword(password);
-        professor.setName(professorUserName);
+        professor.setUserName(professorUserName);
 
         System.out.println("Enter Address:");
         String address = s.next();
@@ -170,7 +184,7 @@ public class AdminCRSMenu {
         System.out.println("*************************** Professor *************************** ");
         System.out.println(String.format("%20s | %20s | %20s ", "ProfessorId", "Name", "Designation"));
         for(Professor professor : professorList) {
-            System.out.println(String.format("%20s | %20s | %20s ", professor.getUserId(), professor.getName(), professor.getDesignation()));
+            System.out.println(String.format("%20s | %20s | %20s ", professor.getUserId(), professor.getUserName(), professor.getDesignation()));
         }
 
 
@@ -210,9 +224,9 @@ public class AdminCRSMenu {
         if(pendingStudentsList.size() == 0) {
             return pendingStudentsList;
         }
-        System.out.println(String.format("%20s | %20s | %20s ", "UserId", "StudentId", "Name"));
+        System.out.println(String.format("%20s | %20s ", "UserId", "Branch"));
         for(Student student : pendingStudentsList) {
-            System.out.println(String.format("%20s | %20s | %20s", student.getUserId(), student.getUserId(), student.getName()));
+            System.out.println(String.format("%20s | %20s ", student.getUserId(), student.getBranchName()));
         }
         return pendingStudentsList;
     }
@@ -235,6 +249,27 @@ public class AdminCRSMenu {
             System.out.println(String.format("%20s | %20s | %20s", course.getCourseId(), course.getCourseName(), course.getInstructorId()));
         }
         return courseList;
+    }
+
+    private void generateGradeCard(){
+        System.out.println("*************************** Grade Card *************************** ");
+        System.out.println("Enter the student username :");
+
+        String studentId = s.next();
+
+        List<EnrolledStudent> grades = adminImpl.generateGradeCard(studentId);
+
+        if(grades.size() == 0) {
+           System.out.println("Student enrolled in none of the courses!");
+        }
+        System.out.println(String.format("%20s | %20s" ,"Student Id","Semester"));
+        System.out.println(String.format("%20s | %20s ",grades.get(0).getStudentId(), grades.get(0).getSem()));
+
+
+        System.out.println(String.format("%20s | %20s | %20s ", "StudentId", "Semester", "Name"));
+        for(EnrolledStudent course : grades) {
+            System.out.println(String.format("%20s | %20s ", course.getCourseCode(),course.getGrade()));
+        }
     }
 
 
