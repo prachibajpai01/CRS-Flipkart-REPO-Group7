@@ -224,9 +224,9 @@ public class AdminCRSMenu {
         if(pendingStudentsList.size() == 0) {
             return pendingStudentsList;
         }
-        System.out.println(String.format("%20s | %20s | %20s ", "UserId", "StudentId", "Name"));
+        System.out.println(String.format("%20s | %20s ", "UserId", "Branch"));
         for(Student student : pendingStudentsList) {
-            System.out.println(String.format("%20s | %20s | %20s", student.getUserId(), student.getUserId(), student.getName()));
+            System.out.println(String.format("%20s | %20s ", student.getUserId(), student.getBranchName()));
         }
         return pendingStudentsList;
     }
