@@ -12,36 +12,70 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import com.flipkart.utils.DBUtils;
 
 public class ProfessorDaoOperation {
 
-    public boolean addGrade(int studentId,String courseCode,String grade){
+    public static void main(String args[]){
+        ProfessorDaoOperation p= new ProfessorDaoOperation();
+       p.addGrade("1","a","5");
+       p.viewEnrolledStudents("P1");
+       p.getProfessorById("P1");
+    }
+
+    public boolean addGrade(String studentId,String courseCode,String grade){
 
         Connection connection=DBUtils.getConnection();
+        System.out.println("y");
         try {
             PreparedStatement statement = connection.prepareStatement("update GradeCard set Grade=? where courseId=? and studentId=?");
 
             statement.setString(1, grade);
             statement.setString(2, courseCode);
-            statement.setInt(3, studentId);
+            statement.setString(3, studentId);
 
             int row = statement.executeUpdate();
 
+            PreparedStatement s = connection.prepareStatement("select * from GradeCard");
+            ResultSet rs =s.executeQuery();
+            // System.out.println(rs);
+            while(rs.next())
+            {
+                System.out.println(rs.getString("Grade"));
+            }
             if(row==1)
                 return true;
             else
                 return false;
         }
         catch (SQLException e) {
+            System.out.println("n");
             throw new RuntimeException(e);
         }
-        return true;
+       // return true;
     }
 
 
     public List<EnrolledStudent> viewEnrolledStudents(String profId){
 
-        return null;
+        Connection connection=DBUtils.getConnection();
+        List<EnrolledStudent> enrolledStudents=new ArrayList<EnrolledStudent>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select courseCatalogue.courseId,courseCatalogue.courseName,registeredStudent.userId from courseCatalogue inner join registeredStudent on courseCatalogue.courseId = registeredStudent.courseId where courseCatalogue.professorId = ? ");
+            statement.setString(1, profId);
+
+            ResultSet results = statement.executeQuery();
+            while(results.next())
+            {
+                //public EnrolledStudent(String courseCode, String courseName, int studentId)
+                System.out.println(results.getString("userId"));
+                enrolledStudents.add(new EnrolledStudent(results.getString("courseId"),results.getString("courseName"),results.getString("userId")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        // System.out.println(enrolledStudents.);
+        return enrolledStudents;
     }
 
 
@@ -51,14 +85,14 @@ public class ProfessorDaoOperation {
         Connection connection=DBUtils.getConnection();
         try
         {
-            PreparedStatement statement = connection.prepareStatement("select courseId courseName instructorId  from CourseCatalogue where professorId = ?");
+            PreparedStatement statement = connection.prepareStatement("select courseId,courseName, instructorId  from CourseCatalogue where professorId = ?");
 
             statement.setString(1, profId);
             ResultSet rs = statement.executeQuery();
 
             while(rs.next())
             {
-                courseData.add(new Course(rs.getString("courseId"),rs.getString("courseName"),rs.getString("professorId"),results.getInt("seats")));
+                courseData.add(new Course(rs.getString("courseId"),rs.getString("courseName"),rs.getString("professorId")));
             }
 
         } catch (SQLException e) {
@@ -74,15 +108,20 @@ public class ProfessorDaoOperation {
         Connection connection=DBUtils.getConnection();
         try
         {
-            PreparedStatement statement = connection.prepareStatement("select department designation from Professor where professorId = ?");
+            PreparedStatement statement = connection.prepareStatement("select department,designation from professor where userId = ?");
 
             statement.setString(1, profId);
             ResultSet rs = statement.executeQuery();
-            rs.next();
 
-        } catch (SQLException e) {
+            while(rs.next())
+            professorData = (new Professor(rs.getString("department"),rs.getString("designation"),profId));
+
+        }
+        catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        if(professorData!=null)
+        System.out.println(professorData.getDepartment());
         return professorData;
     }
 }

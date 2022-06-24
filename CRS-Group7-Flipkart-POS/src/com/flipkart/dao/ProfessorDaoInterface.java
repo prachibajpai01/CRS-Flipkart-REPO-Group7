@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface ProfessorDaoInterface {
 
-    public boolean addGrade(int studentId,String courseCode,String grade);
+    public boolean addGrade(String studentId,String courseCode,String grade);
 
     public List<EnrolledStudent> viewEnrolledStudents(String profId);
 
