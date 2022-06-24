@@ -13,7 +13,7 @@ public interface StudentInterface {
      * Method to register student
      * @param name,userId,password,batch,branch,address: name,userId,password,batch,branch,address of respective student
      */
-    public int register(String name,String userID,String password,int batch,String branch,String address);
+    public void register(String name,String userID,String password,int batch,String branch,String address);
 
     /**
      * Method to get studentId

@@ -8,10 +8,10 @@ public class SQLQueriesConstants {
 
     public static final String DELETE_COURSE = "";
 
-    public static final String ADD_USER = "INSERT INTO user(userId,userName,password,role) values (?,?,?,?)";
+    public static final String ADD_USER = "Insert into user (userId,userName,password,role,address) values(?,?,?,?,?)";
 
-    public static final String ADD_PROFESSOR = "INSERT INTO professor(department,designation,proffId) values (?,?,?)";
+    public static final String ADD_PROFESSOR = "INSERT INTO professor(department,designation,profId) values (?,?,?)";
 
-
+    public static final String REGISTER_STUDENT = "Insert into student (userId,branch,isApproved) values(?,?,?)";
 
 }

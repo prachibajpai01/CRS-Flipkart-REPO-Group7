@@ -3,13 +3,13 @@ package com.flipkart.bean;
 // student inherits from user
 public class Student extends User{
 
-    private String branchName; // branch of student
+    private String branch; // branch of student
     private int batch; // batch of student
     private Boolean isApproved; // whether student is approved for semester
 
 
-    public Student(String branchName, int batch,Boolean isApproved,String id){
-        this.branchName = branchName;
+    public Student(String branch, int batch,Boolean isApproved,String id){
+        this.branch = branch;
         this.batch = batch;
         this.isApproved = isApproved;
         this.setUserId(id);
@@ -19,11 +19,11 @@ public class Student extends User{
     public Student(){};
 
     public String getBranchName() {
-        return branchName;
+        return branch;
     }
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
+    public void setBranchName(String branch) {
+        this.branch = branch;
     }
 
     public int getBatch() {

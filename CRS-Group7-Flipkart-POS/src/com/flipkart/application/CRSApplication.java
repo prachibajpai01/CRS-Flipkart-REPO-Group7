@@ -106,10 +106,12 @@ public class CRSApplication {
         System.out.println("Batch:");
         batch=sc.nextInt();
         System.out.println("Branch:");
-        branch=sc.nextLine();
-        sc.nextLine();
+        branch=sc.next();
+        //sc.nextLine();
         System.out.println("Address:");
-        address=sc.nextLine();
+        address=sc.next();
+
+        studentImpl.register(name,userId,password,batch,branch,address);
 
 //        int studentId=studentImpl.register(name,userId,password,batch,branch,address);
     }
