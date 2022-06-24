@@ -34,7 +34,7 @@ public class StudentImpl implements StudentInterface{
      */
     @Override
     public boolean isApproved(String userId) {
-        return true;
+        return studentDaoInterface.isApproved(userId);
     }
 
     /**
@@ -83,8 +83,7 @@ public class StudentImpl implements StudentInterface{
      */
     @Override
     public void viewRegisteredCourses(String userId) {
-
-//        return studentCourseData.get(userId);
+        studentDaoInterface.viewRegisteredCourses(userId);
     }
 
     /**
