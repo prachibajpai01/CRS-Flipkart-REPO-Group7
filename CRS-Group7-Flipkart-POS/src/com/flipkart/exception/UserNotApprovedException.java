@@ -1,15 +1,15 @@
 package com.flipkart.exception;
 /**
- * Exception to check if user is not found
+ * Exception to check if user is not approved
  */
-public class UserNotFoundException extends Exception {
+public class UserNotApprovedException extends Exception{
     private String userId;
 
     /**
      * Constructor
      * @param userId: userId of the user
      */
-    public UserNotFoundException(String userId) {
+    public UserNotApprovedException(String userId) {
         this.userId = userId;
     }
 
@@ -18,14 +18,14 @@ public class UserNotFoundException extends Exception {
      */
     @Override
     public String getMessage() {
-        return "User with ID: " + this.userId + " is not found.";
+        return "User with ID: " + this.userId + " can not be approved.";
     }
 
     public static void main(String args[]) {
-        String exampleUserId = "1234";
+        String exampleUserId = "1238";
         try {
-            throw new UserNotFoundException(exampleUserId);
-        } catch (UserNotFoundException e) {
+            throw new UserNotApprovedException(exampleUserId);
+        } catch (UserNotApprovedException e) {
             System.out.println(e);
         }
     }
