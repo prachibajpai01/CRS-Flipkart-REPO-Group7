@@ -34,6 +34,10 @@ public class SQLQueriesConstants {
 
     public static final String VIEW_GRADE_CARD = "SELECT * FROM registered_courses WHERE studentId = ?";
 
+    public static final String ADD_COURSE_FOR_STUDENT = "Insert into registered_courses (studentId, semester, courseCode, grade) values (?,?,?,?)";
+    public static final String DROP_COURSE_FOR_STUDENT = "delete from registered_courses where studentId=? and courseCode=?";
+
+    public static final String GET_PAYMENT_INFO = "Select * from payment where studentId=?";
 
     // professor queries
 
@@ -42,4 +46,5 @@ public class SQLQueriesConstants {
     public static final String VIEW_ENROLLED_STUDENTS = "Select course.cCode,course.cName,registered_courses.studentId, registered_courses.semester from course inner join registered_courses on course.cCode = registered_courses.courseCode where course.instructor = ? ";
 
     public static final String VIEW_ASSIGNED_COURSES = "select cCode,cName, instructor  from course where instructor = ?";
+
 }

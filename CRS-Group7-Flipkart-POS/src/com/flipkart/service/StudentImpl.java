@@ -39,10 +39,13 @@ public class StudentImpl implements StudentInterface{
 
     /**
      * Method to add course
+     *
      * @param userId,courseId,courseCatalogue: studentId of the student,courseId of the course,CourseCatalogueImpl instance
+     * @return
      */
     @Override
-    public void addCourse(String userId,String courseId) {
+    public Boolean addCourse(String userId, String courseId) {
+        return studentDaoInterface.addCourse(userId, courseId);
 //        if(!studentCourseData.containsKey(userId)){
 //            studentCourseData.put(userId, new HashSet<>());
 //        }
@@ -54,10 +57,12 @@ public class StudentImpl implements StudentInterface{
 
     /**
      * Method to drop course
+     *
      * @param userId,courseId,courseCatalogue: studentId of the student,courseId of the course,CourseCatalogueImpl instance
      */
     @Override
-    public void dropCourse(String userId,String courseId) {
+    public Boolean dropCourse(String userId, String courseId) {
+        return studentDaoInterface.dropCourse(userId, courseId);
 //        studentCourseData.get(userId).remove(courseId);
 //        courseCatalogue.unenrollStudent(userId, courseId);
     }

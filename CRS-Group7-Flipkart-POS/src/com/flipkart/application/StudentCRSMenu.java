@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.Payment;
+import com.flipkart.service.*;
 import com.flipkart.bean.EnrolledStudent;
 import com.flipkart.service.StudentImpl;
 
@@ -18,12 +20,12 @@ public class StudentCRSMenu {
     Scanner sc = new Scanner(System.in);
 
 
-
     /**
      * Student service instance
      */
     StudentImpl studentImpl=new StudentImpl();
 
+    PaymentInterface paymentInterface = new PaymentImpl();
     /**
      * Create CRS menu for student
      * @param studentId ID of student
@@ -38,7 +40,7 @@ public class StudentCRSMenu {
             System.out.println("3. View Course");
             System.out.println("4. View Registered Courses");
             System.out.println("5. View grade card");
-            System.out.println("6. Make Payment");
+            System.out.println("6. Payment Info");
             System.out.println("7. Logout");
             System.out.println("*****************************");
 
@@ -67,6 +69,10 @@ public class StudentCRSMenu {
                     break;
 
                 case 6:
+                    paymentInfo(studentId);
+                    break;
+
+                case 7:
                     CRSApplication.loggedin = false;
                     return;
 
@@ -76,17 +82,25 @@ public class StudentCRSMenu {
         }
     }
 
+    private void paymentInfo(String studentId) {
+        System.out.println(studentId);
+        ArrayList<Payment> paymentsInfo = paymentInterface.getPaymentInfo(studentId);
+        for(Payment p:paymentsInfo){
+            System.out.println(p.getReferenceId()+" "+p.getStudentId()+" "+p.getAmount()+" "+p.getPaid()+" "+p.getType());
+        }
+    }
+
     /**
      * Add a course for a student by taking course ID.
      * @param studentId ID of student.
      */
     private void addCourse(String studentId) {
         Scanner sc=new Scanner(System.in);
-        viewCourse(studentId);
+        //viewCourse(studentId);
 
         System.out.println("Enter course id to add :");
         String newcourseid=sc.nextLine();
-
+        studentImpl.addCourse(studentId,newcourseid);
     }
 
     /**
@@ -94,13 +108,21 @@ public class StudentCRSMenu {
      * @param studentId ID of student
      */
     private void dropCourse(String studentId) {
-            Set<String> registeredCourseList = viewRegisteredCourse(studentId);
+        Scanner sc = new Scanner(System.in);
+        //viewCourse(studentId);
+
+        System.out.print("Enter course ID to drop: ");
+        String dropCourseId = sc.next();
+        studentImpl.dropCourse(studentId, dropCourseId);
+        /*
+        Set<String> registeredCourseList = viewRegisteredCourse(studentId);
 
             if (registeredCourseList == null)
                 return;
 
             System.out.println("Enter the Course Code : ");
             String courseCode = sc.next();
+            studentImpl.dropCourse(studentId,courseCode,courseCatalogue);
     }
 
     /**

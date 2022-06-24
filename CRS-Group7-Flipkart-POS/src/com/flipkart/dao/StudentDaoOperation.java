@@ -5,6 +5,7 @@ import com.flipkart.bean.*;
 import com.flipkart.constant.SQLQueriesConstants;
 
 import com.flipkart.utils.DatabaseUtil;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -53,10 +54,41 @@ public class StudentDaoOperation implements StudentDaoInterface {
     }
 
     @Override
+    public Boolean addCourse(String userId, String courseId){
+        try{
+            Connection connection = DatabaseUtil.getConnection();
+            String sql = SQLQueriesConstants.ADD_COURSE_FOR_STUDENT;
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, userId);
+            stmt.setInt(2, 0);
+            stmt.setString(3, courseId);
+            stmt.setString(4, "None");
+
+            System.out.println(stmt);
+            int row = stmt.executeUpdate();
+
+            if (row == 0) {
+                System.out.println("Could not add course");
+            } else {
+                System.out.println("Course added successfully");
+                return true;
+            }
+
+        }catch (SQLException se){
+            System.out.println("exception executed");
+            throw new RuntimeException(se);
+        }
+        return false;
+    }
+
+    public static void main(String args[]){
+        //System.out.println(addCourse("akash", "01"));
+        //System.out.println(dropCourse("akash", "01"));
+    }
+
+    @Override
     public String getStudentId(String userId) {
-
-
-        return null;
+        return userId;
     }
 
     @Override
@@ -65,13 +97,29 @@ public class StudentDaoOperation implements StudentDaoInterface {
     }
 
     @Override
-    public void addCourse(String userId, String courseId) {
+    public  Boolean dropCourse(String userId, String courseId) {
+        try{
+            Connection connection = DatabaseUtil.getConnection();
+            String sql = SQLQueriesConstants.DROP_COURSE_FOR_STUDENT;
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, userId);
+            stmt.setString(2, courseId);
 
-    }
+            System.out.println(stmt);
+            int row = stmt.executeUpdate();
 
-    @Override
-    public void dropCourse(String userId, String courseId) {
+            if (row == 0) {
+                System.out.println("Could not drop course");
+            } else {
+                System.out.println("Course dropped successfully");
+                return true;
+            }
 
+        }catch (SQLException se){
+            System.out.println("exception executed");
+            throw new RuntimeException(se);
+        }
+        return false;
     }
 
     @Override

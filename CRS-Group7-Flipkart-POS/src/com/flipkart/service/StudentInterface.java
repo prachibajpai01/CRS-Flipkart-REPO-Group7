@@ -26,15 +26,18 @@ public interface StudentInterface {
 
     /**
      * Method to add course
+     *
      * @param userId,courseId,courseCatalogue: studentId of the student,courseId of the course,CourseCatalogueImpl instance
+     * @return
      */
-    public void addCourse(String userId,String courseId);
+    public Boolean addCourse(String userId, String courseId);
 
     /**
      * Method to drop course
+     *
      * @param userId,courseId,courseCatalogue: studentId of the student,courseId of the course,CourseCatalogueImpl instance
      */
-    public void dropCourse(String userId,String courseId);
+    public Boolean dropCourse(String userId, String courseId);
 
     /**
      * Method to view all courses
