@@ -2,7 +2,6 @@ package com.flipkart.application;
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.EnrolledStudent;
-import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.ProfessorImpl;
 import com.flipkart.service.ProfessorInterface;
 import java.util.*;
@@ -19,10 +18,6 @@ public class ProfessorCRSMenu {
      */
     Scanner sc = new Scanner(System.in);
 
-    /**
-     * Course catalogue service instance
-     */
-    CourseCatalogueImpl courseCatalogue=null;
 
     /**
      * Professor service instance

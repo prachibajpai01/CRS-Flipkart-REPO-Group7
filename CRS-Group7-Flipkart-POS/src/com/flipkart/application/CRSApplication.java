@@ -1,7 +1,6 @@
 package com.flipkart.application;
 
 import com.flipkart.exception.UserNotFoundException;
-import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.StudentImpl;
 import com.flipkart.service.UserImpl;
 import com.flipkart.service.ProfessorImpl;
@@ -27,10 +26,7 @@ public class CRSApplication {
     StudentImpl studentImpl=new StudentImpl();
     ProfessorImpl professorImpl = new ProfessorImpl();
 
-    /**
-     * Course catalogue service to interact with courses.
-     */
-    CourseCatalogueImpl courseCatalogue = new CourseCatalogueImpl();
+
     static boolean loggedin = false;
 
     /**
@@ -115,7 +111,7 @@ public class CRSApplication {
 
                         if (isApproved) {
                             StudentCRSMenu studentCRSMenu = new StudentCRSMenu();
-                            studentCRSMenu.createMenu(studentId, courseCatalogue);
+                            studentCRSMenu.createMenu(studentId);
                         } else {
                             System.out.println("Failed to login, you have not been approved by the administration!");
                         }
