@@ -14,8 +14,8 @@ public interface AdminDaoInterface {
 
     public void addUser(User user);
     public void assignCourse(String courseCode, String professorId);
-    public Collection<Course> viewCourses();
+    public List<Course> viewCourses();
     public List<Professor> viewProfessors();
 
-    public void sendNotification(String  studentId, Notification notification);
+    public List<EnrolledStudent> generateGradeCard(String studentId);
 }

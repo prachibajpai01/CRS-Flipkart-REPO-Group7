@@ -1,70 +1,47 @@
 package com.flipkart.bean;
 
-/**
- * A class for recording enrollment data of a student-course pair.
- */
 public class EnrolledStudent {
+    private String courseCode;
+    private int sem;
+    private String grade;
+    private String studentId;
 
-    /**
-     * ID of course
-     */
-    private String courseId;
-
-    /**
-     * Name of course
-     */
-    private String courseName;
-
-    /**
-     * ID of student taking the course
-     */
-    private int studentId;
-
-    /**
-     * Course code getter
-     * @return the enrolled course code
-     */
-    public String getCourseId() {
-        return courseId;
+    public EnrolledStudent(String courseCode, String studentId, int sem, String grade) {
+        super();
+        this.courseCode = courseCode;
+        this.studentId = studentId;
+        this.sem = sem;
+        this.grade = grade;
     }
 
-    /**
-     * Course code setter
-     * @param courseId code for the enrolled course
-     */
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
+    public String getCourseCode() {
+        return courseCode;
     }
 
-    /**
-     * Course name getter
-     * @return get name of course
-     */
-    public String getCourseName() {
-        return courseName;
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
-    /**
-     * Course name setter
-     * @param courseName name of course student is enrolled in
-     */
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    /**
-     * Student ID getter
-     * @return the student ID
-     */
-    public int getStudentId() {
+    public String  getStudentId() {
         return studentId;
     }
 
-    /**
-     * Student ID setter
-     * @param studentId ID of student
-     */
-    public void setStudentId(int studentId) {
+    public void setStudentId(String studentId) {
         this.studentId = studentId;
+    }
+    public int getSem() {
+        return sem;
+    }
+
+    public void setSem(int sem) {
+        this.sem = sem;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }
