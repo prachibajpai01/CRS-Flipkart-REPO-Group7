@@ -4,15 +4,39 @@ import java.util.*;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.EnrolledStudent;
 import com.flipkart.bean.GradeCard;
+import com.flipkart.service.AdminImpl;
+import com.flipkart.service.AdminInterface;
 import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.StudentImpl;
 
+/**
+ * Class for Student CRS menu.
+ */
 public class StudentCRSMenu {
-    Scanner sc = new Scanner(System.in);
-    CourseCatalogueImpl courseCatalogue = null;
-    StudentImpl studentImpl=new StudentImpl();
 
+    /**
+     * Scanner to take user input
+     */
+    Scanner sc = new Scanner(System.in);
+
+    /**
+     * Course catalogue service instance
+     */
+    CourseCatalogueImpl courseCatalogue = null;
+
+    /**
+     * Student service instance
+     */
+    StudentImpl studentImpl=new StudentImpl();
+    AdminInterface adminImpl = new AdminImpl();
+
+    /**
+     * Create CRS menu for student
+     * @param studentId ID of student
+     * @param courseCatalogue Catalogue of courses to interact with courses.
+     */
     public void createMenu(String studentId, CourseCatalogueImpl courseCatalogue) {
         this.courseCatalogue = courseCatalogue;
         while (CRSApplication.loggedin) {
@@ -62,6 +86,10 @@ public class StudentCRSMenu {
         }
     }
 
+    /**
+     * Add a course for a student by taking course ID.
+     * @param studentId ID of student.
+     */
     private void addCourse(String studentId) {
         Scanner sc=new Scanner(System.in);
         viewCourse(studentId);
@@ -71,6 +99,10 @@ public class StudentCRSMenu {
         studentImpl.addCourse(studentId,newcourseid,courseCatalogue);
     }
 
+    /**
+     * Drop course for a student by taking course ID
+     * @param studentId ID of student
+     */
     private void dropCourse(String studentId) {
             Set<String> registeredCourseList = viewRegisteredCourse(studentId);
 
@@ -82,6 +114,11 @@ public class StudentCRSMenu {
             studentImpl.dropCourse(studentId,courseCode,courseCatalogue);
     }
 
+    /**
+     * Display courses available in catalogue along with returning them.
+     * @param studentId ID of student
+     * @return ArrayList of available courses.
+     */
     private ArrayList<Course> viewCourse(String studentId) {
         ArrayList<Course> course_available = courseCatalogue.sendCatalogue();
 
@@ -100,16 +137,24 @@ public class StudentCRSMenu {
         return course_available;
     }
 
+    /**
+     * Display registered courses of a student
+     * @param studentId ID of student
+     * @return list of courses of student
+     */
     private Set<String> viewRegisteredCourse(String studentId) {
 
        return null;
     }
 
-
+    /**
+     * Display grade card of student
+     * @param studentId ID of student
+     */
     private void viewGradeCard(String studentId) {
 
 
-        List<GradeCard> grade_card = null;
+        List<EnrolledStudent> grade_card = adminImpl.generateGradeCard(studentId);
         System.out.println(String.format("%-20s %-20s %-20s", "COURSE ID", "GRADE"));
 
         if (grade_card.isEmpty()) {
@@ -117,8 +162,8 @@ public class StudentCRSMenu {
             return;
         }
 
-        for (GradeCard obj : grade_card) {
-            System.out.println(String.format("%-20s %-20s %-20s", obj.getCourseId(), obj.getGrade()));
+        for (EnrolledStudent obj : grade_card) {
+            System.out.println(String.format("%-20s %-20s %-20s", obj.getCourseCode(), obj.getGrade()));
         }
     }
 
