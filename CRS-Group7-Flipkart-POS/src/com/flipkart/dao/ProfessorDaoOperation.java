@@ -27,7 +27,7 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface{
         Connection connection=DatabaseUtil.getConnection();
 
         try {
-            PreparedStatement statement = connection.prepareStatement("update registeredCourses set grade=? where courseCode=? and studentId=?");
+            PreparedStatement statement = connection.prepareStatement("update registered_courses set grade=? where courseCode=? and studentId=?");
 
             statement.setString(1, grade);
             statement.setString(2, courseCode);
@@ -53,7 +53,7 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface{
         Connection connection=DatabaseUtil.getConnection();
         List<EnrolledStudent> enrolledStudents=new ArrayList<EnrolledStudent>();
         try {
-            PreparedStatement statement = connection.prepareStatement("Select course.cCode,course.cName,registered_courses.studentId, registered_courses.semester from course inner join registeredCourses on course.cCode = registeredCourses.courseCode where course.instructor = ? ");
+            PreparedStatement statement = connection.prepareStatement("Select course.cCode,course.cName,registered_courses.studentId, registered_courses.semester from course inner join registered_courses on course.cCode = registered_courses.courseCode where course.instructor = ? ");
             statement.setString(1, profId);
 
             ResultSet results = statement.executeQuery();
