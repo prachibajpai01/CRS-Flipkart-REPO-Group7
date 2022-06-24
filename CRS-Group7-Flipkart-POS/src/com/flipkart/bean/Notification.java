@@ -48,7 +48,7 @@ public class Notification {
 
     /**
      * Notification Id setter
-     * @param notificationId
+     * @param notificationId set notification ID
      */
 
     public void setNotificationId(int notificationId) {
@@ -66,7 +66,7 @@ public class Notification {
 
     /**
      * Message setter
-     * @param message
+     * @param message set the message of notification
      */
 
     public void setMessage(String message) {
@@ -84,7 +84,7 @@ public class Notification {
 
     /**
      * Notification Type Setter
-     * @param notificationType
+     * @param notificationType set notification type
      */
 
     public void setNotificationType(NotificationType notificationType) {

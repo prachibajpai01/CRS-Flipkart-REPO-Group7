@@ -42,7 +42,7 @@ public class Professor extends User{
 
     /**
      * Department setter
-     * @param department
+     * @param department set department of professor
      */
 
     public void setDepartment(String department) {
@@ -60,7 +60,7 @@ public class Professor extends User{
 
     /**
      * designation setter
-     * @param designation
+     * @param designation set designation of professor
      */
 
     public void setDesignation(String designation) {

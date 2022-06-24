@@ -22,7 +22,7 @@ public interface StudentInterface {
 
     /**
      * Method know whether student isapproved
-     * @param userId,: studentId of the student
+     * @param studentId,: studentId of the student
      */
     public boolean isApproved(String studentId);
 

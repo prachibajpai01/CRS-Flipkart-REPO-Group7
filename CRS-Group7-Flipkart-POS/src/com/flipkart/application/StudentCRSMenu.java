@@ -73,7 +73,7 @@ public class StudentCRSMenu {
                     break;
 
                 case 5:
-                    viewGradeCard(studentId);
+                    //viewGradeCard(studentId);
                     break;
 
                 case 6:
@@ -151,7 +151,7 @@ public class StudentCRSMenu {
      * Display grade card of student
      * @param studentId ID of student
      */
-    private void viewGradeCard(String studentId) {
+    /*private void viewGradeCard(String studentId) {
 
 
         List<EnrolledStudent> grade_card = adminImpl.generateGradeCard(studentId);
@@ -165,6 +165,6 @@ public class StudentCRSMenu {
         for (EnrolledStudent obj : grade_card) {
             System.out.println(String.format("%-20s %-20s %-20s", obj.getCourseCode(), obj.getGrade()));
         }
-    }
+    }*/
 
 }
