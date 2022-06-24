@@ -14,13 +14,15 @@ public interface StudentDaoInterface {
     public void register(String userName, String userID, String password, int batch, String branch, String address);
     public String getStudentId(String userId);
     public boolean isApproved(String studentId);
-    public void addCourse(String userId, String courseId, CourseCatalogueImpl courseCatalogue);
-    public void dropCourse(String userId, String courseId, CourseCatalogueImpl courseCatalogue);
+    public Boolean dropCourse(String userId, String courseId);
+
     public ArrayList<Course> viewCourseList(CourseCatalogueImpl courseCatalogue);
     public void viewRegisteredCourses(String userId);
     public GradeCard viewGradeCard(int studentId);
 
     public void addUser(User user);
+
+    public Boolean addCourse(String userId, String courseId);
 
 }
 

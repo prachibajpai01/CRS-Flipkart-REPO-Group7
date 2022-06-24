@@ -2,7 +2,7 @@ package com.flipkart.constant;
 
 public class SQLQueriesConstants {
     // user DAO operations
-    public static final String VERIFY_CREDENTIALS = "SELECT * FROM user WHERE userName = ? AND password = ?";
+    public static final String VERIFY_CREDENTIALS = "SELECT * FROM user WHERE userId = ? AND password = ?";
     public static final String GET_ROLE = "SELECT role FROM user WHERE userName = ?";
     public static final String UPDATE_PASSWORD = "UPDATE user SET password = ? WHERE userName = ?";
 
@@ -30,4 +30,8 @@ public class SQLQueriesConstants {
 
     public static final String REGISTER_STUDENT = "Insert into student (userId,branch,approved) values(?,?,?)";
 
+    public static final String ADD_COURSE_FOR_STUDENT = "Insert into registered_courses (studentId, semester, courseCode, grade) values (?,?,?,?)";
+    public static final String DROP_COURSE_FOR_STUDENT = "delete from registered_courses where studentId=? and courseCode=?";
+
+    public static final String GET_PAYMENT_INFO = "Select * from payment where studentId=?";
 }

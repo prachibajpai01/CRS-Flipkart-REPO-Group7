@@ -99,7 +99,8 @@ public class CRSApplication {
             if (loggedin) {
                 displayCurrentDateTime();
                 String role = userImpl.getRole(userId);
-                switch (role) {
+                //System.out.println(role);
+                switch (role.toUpperCase()) {
                     case "ADMIN":
                         AdminCRSMenu adminCRSMenu = new AdminCRSMenu();
                         adminCRSMenu.createMenu();
@@ -108,7 +109,7 @@ public class CRSApplication {
                     case "STUDENT":
                         String studentId = studentImpl.getStudentId(userId);
                         boolean isApproved = studentImpl.isApproved(studentId);
-
+                        //System.out.println(isApproved);
                         if (isApproved) {
                             StudentCRSMenu studentCRSMenu = new StudentCRSMenu();
                             studentCRSMenu.createMenu(studentId, courseCatalogue);
