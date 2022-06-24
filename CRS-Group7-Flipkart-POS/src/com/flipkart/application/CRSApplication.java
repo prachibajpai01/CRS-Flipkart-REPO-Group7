@@ -160,7 +160,7 @@ public class CRSApplication {
     public void updatePassword() {
         Scanner sc=new Scanner(System.in);
         String userId,newPassword;
-        System.out.println("Email");
+        System.out.println("Username:");
         userId=sc.next();
         System.out.println("New Password:");
         newPassword=sc.next();
