@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface StudentDaoInterface {
 
-    public void register(String name, String userID, String password, int batch, String branch, String address);
+    public void register(String userName, String userID, String password, int batch, String branch, String address);
     public String getStudentId(String userId);
     public boolean isApproved(String studentId);
     public void addCourse(String userId, String courseId, CourseCatalogueImpl courseCatalogue);

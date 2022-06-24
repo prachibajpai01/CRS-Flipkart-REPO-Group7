@@ -15,12 +15,12 @@ import java.util.ArrayList;
 public class StudentDaoOperation implements StudentDaoInterface {
 
     @Override
-    public void register(String name, String userId, String password, int batch, String branch, String address) {
+    public void register(String userName, String userId, String password, int batch, String branch, String address) {
 
         Connection connection = DatabaseUtil.getConnection();
         System.out.println("y");
         Student stu = new Student();
-        stu.setName(name);
+        stu.setName(userName);
         stu.setUserId(userId);
         stu.setPassword(password);
         stu.setBatch(batch);
@@ -32,7 +32,7 @@ public class StudentDaoOperation implements StudentDaoInterface {
         try {
             String sql = SQLQueriesConstants.REGISTER_STUDENT;
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, name);
+            statement.setString(1, userName);
             statement.setString(2, branch);
             statement.setInt(3, 0);
 
@@ -97,7 +97,6 @@ public class StudentDaoOperation implements StudentDaoInterface {
             preparedStatement.setString(2, user.getName());
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setString(4, "student");
-            preparedStatement.setString(5, user.getAddress());
 
             int row = preparedStatement.executeUpdate();
 
