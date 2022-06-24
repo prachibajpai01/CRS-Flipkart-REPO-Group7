@@ -1,8 +1,11 @@
 package com.flipkart.application;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.EnrolledStudent;
 import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.ProfessorImpl;
+import com.flipkart.service.ProfessorInterface;
+import java.util.*;
 
 import java.util.Scanner;
 
@@ -12,35 +15,93 @@ public class ProfessorCRSMenu {
     ProfessorImpl professorImpl=new ProfessorImpl();
     Boolean isLoggedIn=true;
 
-    public void createMenu(String profId, CourseCatalogueImpl courseCatalogue){
+    public static void main(String[] args) {
+        ProfessorCRSMenu crs = new ProfessorCRSMenu();
+        crs.createMenu("P5");
+    }
+
+    public void createMenu(String profId){
         this.courseCatalogue=courseCatalogue;
         while(isLoggedIn){
             System.out.println("*****************************");
             System.out.println("**********Professor Menu*********");
             System.out.println("*****************************");
-            System.out.println("1. View Enrolled Students");
-            System.out.println("2: Give grades");
-            System.out.println("3: Logout");
+            System.out.println("1: Get Courses");
+            System.out.println("2. View Enrolled Students");
+            System.out.println("3: Add grades");
+            System.out.println("4: Logout");
             System.out.println("*****************************");
 
-            int choice = sc.nextInt();
+            System.out.println("Enter Choice");
 
-            switch (choice){
+            int choice ;
+
+            choice=sc.nextInt();
+            switch(choice)
+            {
                 case 1:
-                    viewEnrolledStudents(profId);
+                    //view all the courses taught by the professor
+                    getCourses(profId);
+                    break;
                 case 2:
+                    //view all the enrolled students for the course
+                    viewEnrolledStudents(profId);
+                    break;
+
                 case 3:
-                    isLoggedIn=false;
-                    System.out.println("Logging out");
+                    //add grade for a student
+                    addGrade(profId);
+                    break;
+                case 4:
+                    //logout from the system
+                    CRSApplication.loggedin=false;
+                    return;
                 default:
-                    System.out.println("Wrong option selected.");
+                    System.out.println("***** Wrong Choice *****");
             }
         }
     }
 
-    public void viewEnrolledStudents(String profId){
-        for(Course course:professorImpl.getCourses(profId, courseCatalogue)){
-            System.out.println("Students in course "+course.getCourseName()+": "+courseCatalogue.getEnrolledStudents(course.getCourseId()));
-        }
+    private void addGrade(String profId){
+
+        System.out.println("Enter student Id");
+        String studentId= sc.nextLine();
+        sc.nextLine();
+        System.out.println("Enter Grade");
+        String grade= sc.nextLine();
+
+        System.out.println("Enter Course Code :");
+
+        String courseCode= sc.nextLine();
+
+        if(professorImpl.addGrade(studentId,courseCode,grade))
+            System.out.println("Grade added successfully");
     }
+
+    private void viewEnrolledStudents(String profId){
+        List<EnrolledStudent> data =professorImpl.viewEnrolledStudents(profId);
+        if(data.isEmpty()){
+            System.out.println("No student found!!");
+            return;
+        }
+        for(int i=0;i<data.size();i++){
+            System.out.println(data.get(i).getStudentId()+ " ");
+        }
+
+    }
+
+    private void getCourses(String profId){
+        ArrayList<Course> courses = professorImpl.getCourses(profId);
+        if(courses.isEmpty()){
+            System.out.println("No courses found");
+            return;
+        }
+        for(int i=0;i<courses.size();i++){
+            System.out.println(courses.get(i).getCourseName()+ " ");
+        }
+
+    }
+
+
+
 }

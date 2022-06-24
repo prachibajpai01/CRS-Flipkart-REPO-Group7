@@ -5,6 +5,7 @@ import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.StudentImpl;
 import com.flipkart.service.UserImpl;
+import com.flipkart.service.ProfessorImpl;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -14,7 +15,7 @@ import java.util.Scanner;
 public class CRSApplication {
     UserImpl userImpl=new UserImpl();
     StudentImpl studentImpl=new StudentImpl();
-
+    ProfessorImpl professorImpl = new ProfessorImpl();
     CourseCatalogueImpl courseCatalogue = new CourseCatalogueImpl();
     static boolean loggedin = false;
 
@@ -67,7 +68,9 @@ public class CRSApplication {
                         AdminCRSMenu adminCRSMenu = new AdminCRSMenu();
                         adminCRSMenu.createMenu();
                     case "PROFESSOR":
-                        //call menu
+                        String profId = professorImpl.getProfessorById(userId);
+                        ProfessorCRSMenu professorCRSMenu = new ProfessorCRSMenu();
+                        professorCRSMenu.createMenu(profId);
                     case "STUDENT":
                         String studentId = studentImpl.getStudentId(userId);
                         boolean isApproved = studentImpl.isApproved(studentId);

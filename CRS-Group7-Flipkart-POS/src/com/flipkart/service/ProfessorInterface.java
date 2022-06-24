@@ -12,7 +12,7 @@ public interface ProfessorInterface {
      * Method to addgrade
      * @param studentId,courseCode,grade: studentId of the student,courseCode of the course,grade
      */
-    public boolean addGrade(int studentId,String courseCode,String grade);
+    public boolean addGrade(String studentId,String courseCode,String grade);
 
     /**
      * Method to get list of enrolled students in the professor teaching course
@@ -24,11 +24,11 @@ public interface ProfessorInterface {
      * Method to get list of courses professor is teaching
      * @param profId,courseCatalogue: professorId of the professor,CourseCatalogueImpl instance
      */
-    public ArrayList<Course> getCourses(String profId, CourseCatalogueImpl courseCatalogue);
+    public ArrayList<Course> getCourses(String profId);
 
     /**
      * Method to get professorId
      * @param profId,: professorId of the professor
      */
-    public Professor getProfessorById(String profId);
+    public String getProfessorById(String profId);
 }

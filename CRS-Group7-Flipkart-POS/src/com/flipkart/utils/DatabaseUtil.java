@@ -9,7 +9,7 @@ public class DatabaseUtil {
     final static String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     final static String DB_URL = "jdbc:mysql://localhost/CRSDB";
     final static String USER = "root";
-    final static String PASS = "flipkart";
+    final static String PASS = "password";
 
     public static Connection getConnection() {
         if(connection != null)

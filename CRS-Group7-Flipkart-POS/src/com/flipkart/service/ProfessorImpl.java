@@ -3,18 +3,29 @@ package com.flipkart.service;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.EnrolledStudent;
 import com.flipkart.bean.Professor;
+import com.flipkart.dao.ProfessorDaoOperation;
+import com.flipkart.dao.ProfessorDaoInterface;
 
 import java.util.*;
 
 public class ProfessorImpl implements ProfessorInterface {
+
+    ProfessorDaoInterface professorDaoInterface = new ProfessorDaoOperation();
 
     /**
      * Method to addgrade
      * @param studentId,courseCode,grade: studentId of the student,courseCode of the course,grade
      */
     @Override
-    public boolean addGrade(int studentId, String courseCode, String grade) {
-        return false;
+    public boolean addGrade(String studentId, String courseCode, String grade) {
+        try
+        {
+            professorDaoInterface.addGrade(studentId, courseCode, grade);
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return true;
     }
 
     /**
@@ -23,7 +34,14 @@ public class ProfessorImpl implements ProfessorInterface {
      */
     @Override
     public List<EnrolledStudent> viewEnrolledStudents(String profId) {
-        return null;
+        try
+        {
+          return  professorDaoInterface.viewEnrolledStudents(profId);
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     /**
@@ -31,8 +49,8 @@ public class ProfessorImpl implements ProfessorInterface {
      * @param profId,courseCatalogue: professorId of the professor,CourseCatalogueImpl instance
      */
     @Override
-    public ArrayList<Course> getCourses(String profId, CourseCatalogueImpl courseCatalogue) {
-       return  new ArrayList<Course>();
+    public ArrayList<Course> getCourses(String profId) {
+            return  professorDaoInterface.getCourses(profId);
     }
 
     /**
@@ -40,7 +58,7 @@ public class ProfessorImpl implements ProfessorInterface {
      * @param profId,: professorId of the professor
      */
     @Override
-    public Professor getProfessorById(String profId) {
-        return null;
+    public String getProfessorById(String profId) {
+        return professorDaoInterface.getProfessorById(profId);
     }
 }
