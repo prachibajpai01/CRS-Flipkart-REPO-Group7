@@ -1,7 +1,7 @@
 package com.flipkart.service;
 
 import com.flipkart.bean.Course;
-import com.flipkart.bean.Grade;
+import com.flipkart.bean.GradeCard;
 import com.flipkart.bean.Student;
 
 import java.util.*;
@@ -90,7 +90,7 @@ public class StudentImpl implements StudentInterface{
      * @param studentId: studentId of the student
      */
     @Override
-    public List<Grade> viewGradeCard(int studentId) {
+    public List<GradeCard> viewGradeCard(int studentId) {
         System.out.println("Viewing grade card...");
         return null;
     }

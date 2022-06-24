@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
-import com.flipkart.bean.Grade;
+import com.flipkart.bean.GradeCard;
 import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.StudentImpl;
 
@@ -109,7 +109,7 @@ public class StudentCRSMenu {
     private void viewGradeCard(String studentId) {
 
 
-        List<Grade> grade_card = null;
+        List<GradeCard> grade_card = null;
         System.out.println(String.format("%-20s %-20s %-20s", "COURSE ID", "GRADE"));
 
         if (grade_card.isEmpty()) {
@@ -117,7 +117,7 @@ public class StudentCRSMenu {
             return;
         }
 
-        for (Grade obj : grade_card) {
+        for (GradeCard obj : grade_card) {
             System.out.println(String.format("%-20s %-20s %-20s", obj.getCourseId(), obj.getGrade()));
         }
     }

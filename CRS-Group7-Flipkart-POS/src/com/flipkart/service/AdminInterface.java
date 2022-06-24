@@ -1,11 +1,7 @@
 package com.flipkart.service;
-import java.util.Collection;
 import java.util.List;
 
-import com.flipkart.bean.Course;
-import com.flipkart.bean.Notification;
-import com.flipkart.bean.Professor;
-import com.flipkart.bean.Student;
+import com.flipkart.bean.*;
 
 
 public interface AdminInterface {
@@ -47,7 +43,7 @@ public interface AdminInterface {
     /**
      * Method to view courses
      */
-    public Collection<Course> viewCourses();
+    public List<Course> viewCourses();
 
     /**
      * Method to view professor
@@ -58,5 +54,5 @@ public interface AdminInterface {
      * Method to send notifications
      * @param studentId,Notification : studentId of student,Notification object
      */
-    public void sendNotification(String  studentId, Notification notification);
+    public List<EnrolledStudent> generateGradeCard(String  studentId);
 }

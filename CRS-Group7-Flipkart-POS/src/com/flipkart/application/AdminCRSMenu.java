@@ -110,22 +110,7 @@ public class AdminCRSMenu {
      */
     private void approveStudent() {
 
-        List<Student> studentList = viewPendingAdmissions();
-        if(studentList.size() == 0) {
-            return;
-        }
 
-        System.out.println("Enter Student's ID:");
-        String studentUserIdApproval = s.next();
-
-        try {
-            adminImpl.approveStudent(studentUserIdApproval);
-            //send notification from system
-            adminImpl.sendNotification(studentUserIdApproval,new Notification());
-
-        } catch (Exception e) {
-            System.out.println("Cannot approve registration");
-        }
     }
 
     private void addProfessor() {

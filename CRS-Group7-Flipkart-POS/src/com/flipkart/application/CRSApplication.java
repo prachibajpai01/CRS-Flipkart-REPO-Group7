@@ -52,7 +52,7 @@ public class CRSApplication {
     public void loginUser() {
         Scanner sc=new Scanner(System.in);
         String userId,password;
-        System.out.println("Userid:");
+        System.out.println("User Name:");
         userId=sc.next();
         System.out.println("Password:");
         password=sc.next();
