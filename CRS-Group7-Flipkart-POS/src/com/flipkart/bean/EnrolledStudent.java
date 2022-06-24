@@ -14,6 +14,9 @@ public class EnrolledStudent {
         this.grade = grade;
     }
 
+    public EnrolledStudent(){
+
+    }
     public String getCourseCode() {
         return courseCode;
     }

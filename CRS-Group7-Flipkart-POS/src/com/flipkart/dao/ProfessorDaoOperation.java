@@ -53,14 +53,18 @@ public class ProfessorDaoOperation implements ProfessorDaoInterface{
         Connection connection=DatabaseUtil.getConnection();
         List<EnrolledStudent> enrolledStudents=new ArrayList<EnrolledStudent>();
         try {
-            PreparedStatement statement = connection.prepareStatement("Select course.cCode,course.cName,registeredCourses.studentId from course inner join registeredCourses on course.cCode = registeredCourses.courseCode where course.instructor = ? ");
+            PreparedStatement statement = connection.prepareStatement("Select course.cCode,course.cName,registered_courses.studentId, registered_courses.semester from course inner join registeredCourses on course.cCode = registeredCourses.courseCode where course.instructor = ? ");
             statement.setString(1, profId);
 
             ResultSet results = statement.executeQuery();
             while(results.next())
             {
                 //public EnrolledStudent(String courseCode, String courseName, int studentId)
-                enrolledStudents.add(new EnrolledStudent(results.getString("cCode"),results.getString("cName"),results.getString("studentId")));
+                EnrolledStudent student = new EnrolledStudent();
+                student.setCourseCode(results.getString("cCode"));
+                student.setStudentId(results.getString("studentId"));
+                student.setSem(results.getInt("semester"));
+                enrolledStudents.add(student);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
