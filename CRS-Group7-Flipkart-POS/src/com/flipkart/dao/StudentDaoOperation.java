@@ -4,18 +4,13 @@ import com.flipkart.bean.*;
 
 import com.flipkart.service.CourseCatalogueImpl;
 
-import com.flipkart.constant.Role;
 import com.flipkart.constant.SQLQueriesConstants;
 
 import com.flipkart.utils.DatabaseUtil;
-
-//import com.flipkart.utils.DBUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class StudentDaoOperation implements StudentDaoInterface {
 
@@ -37,7 +32,7 @@ public class StudentDaoOperation implements StudentDaoInterface {
         try {
             String sql = SQLQueriesConstants.REGISTER_STUDENT;
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, userId);
+            statement.setString(1, name);
             statement.setString(2, branch);
             statement.setInt(3, 0);
 
@@ -90,7 +85,7 @@ public class StudentDaoOperation implements StudentDaoInterface {
     }
 
     @Override
-    public List<Grade> viewGradeCard(int studentId) {
+    public GradeCard viewGradeCard(int studentId) {
         return null;
     }
 
