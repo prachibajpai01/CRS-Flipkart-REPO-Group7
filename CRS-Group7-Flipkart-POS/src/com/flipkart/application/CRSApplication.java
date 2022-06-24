@@ -88,7 +88,7 @@ public class CRSApplication {
     public void loginUser() {
         Scanner sc=new Scanner(System.in);
         String userId,password;
-        System.out.println("User Name:");
+        System.out.println("User Id:");
         userId=sc.next();
         System.out.println("Password:");
         password=sc.next();
@@ -100,12 +100,12 @@ public class CRSApplication {
                 displayCurrentDateTime();
                 String role = userImpl.getRole(userId);
                 switch (role) {
-                    case "ADMIN":
+                    case "admin":
                         AdminCRSMenu adminCRSMenu = new AdminCRSMenu();
                         adminCRSMenu.createMenu();
-                    case "PROFESSOR":
+                    case "professor":
                         //call menu
-                    case "STUDENT":
+                    case "student":
                         String studentId = studentImpl.getStudentId(userId);
                         boolean isApproved = studentImpl.isApproved(studentId);
 
