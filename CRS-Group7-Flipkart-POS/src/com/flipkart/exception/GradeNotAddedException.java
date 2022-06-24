@@ -10,7 +10,7 @@ public class GradeNotAddedException extends Exception {
 
     @Override
     public String getMessage(){
-        return "Grade of student "+studentId+" for course "+courseId+" is not assigned";
+        return "GradeCard of student "+studentId+" for course "+courseId+" is not assigned";
     }
 
     public static void main(String args[]) {

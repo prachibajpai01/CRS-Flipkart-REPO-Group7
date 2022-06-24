@@ -1,10 +1,6 @@
 package com.flipkart.service;
 
-import com.flipkart.bean.Course;
-import com.flipkart.bean.Notification;
-import com.flipkart.bean.Professor;
-import com.flipkart.bean.Student;
-import com.flipkart.constant.NotificationType;
+import com.flipkart.bean.*;
 import com.flipkart.dao.AdminDaoOperation;
 
 import java.util.*;
@@ -13,21 +9,6 @@ public class AdminImpl implements AdminInterface{
 
     AdminDaoOperation adminDaoOperation = new AdminDaoOperation();
 
-    HashMap<String,Course> courseList = new HashMap<String,Course>(){{
-        put("CSB101",new Course("CSB101","Java","1"));
-        put("CSB201",new Course("CSB201","Android","2"));
-    }};
-
-    HashMap<String,Student> studentList = new HashMap<String,Student>(){{
-        put("01",new Student("Computer Science",1,false,"01"));
-        put("02",new Student("Computer Science",2,false,"02"));
-    }};
-
-
-    HashMap<String,Professor> professorList = new HashMap<String,Professor>(){{
-        put("01",new Professor("Computer Science","Assistant Professor","01"));
-        put("02",new Professor("Computer Science","Professor","02"));
-    }};
 
     /**
      * Method to delete course
@@ -35,16 +16,7 @@ public class AdminImpl implements AdminInterface{
      */
     @Override
     public void deleteCourse(String courseCode) {
-        if(!courseList.containsKey(courseCode)){
-            System.out.println("Course not found in catalog");
-        }
-        try{
-            courseList.remove(courseCode);
-            System.out.println("Course removed successfully");
-
-        }catch (Exception e){
-            System.out.println("There was some error in deleting course");
-        }
+        adminDaoOperation.deleteCourse(courseCode);
     }
 
     /**
@@ -61,17 +33,7 @@ public class AdminImpl implements AdminInterface{
      */
     @Override
     public List<Student> viewPendingAdmissions() {
-        List<Student> pendingStudents = new ArrayList<Student>();
-        for(Student s : studentList.values()){
-            if(s.getApproved() == false){
-                pendingStudents.add(s);
-                Notification notification = new Notification(1,"Registration is pending..");
-                notification.setNotificationType(NotificationType.PAYMENT_DUE);
-                sendNotification(s.getUserId(),notification);
-            }
-        }
-        System.out.println("List of pending student(s) are : ");
-        return pendingStudents;
+        return adminDaoOperation.viewPendingAdmissions();
     }
 
     /**
@@ -80,18 +42,7 @@ public class AdminImpl implements AdminInterface{
      */
     @Override
     public void approveStudent(String studentId) {
-        Student oldStudent = studentList.get(studentId);
-        if(oldStudent.getApproved() == true){
-            System.out.println("Student registration already approved");
-            return;
-        }
-        try {
-            studentList.replace(studentId, new Student(oldStudent.getBranchName(), oldStudent.getBatch(), true, studentId));
-            System.out.println("Student approved successfully");
-
-        }catch (Exception e){
-            System.out.println("Couldn't approve registration");
-        }
+        adminDaoOperation.approveStudent(studentId);
     }
 
     /**
@@ -109,21 +60,15 @@ public class AdminImpl implements AdminInterface{
      */
     @Override
     public void assignCourse(String courseCode, String professorId) {
-        Course oldCourse = courseList.get(courseCode);
-        try {
-            System.out.println("Course assigned successfully");
-            courseList.replace(courseCode, new Course(oldCourse.getCourseId(), oldCourse.getCourseName(), professorId));
-        }catch (Exception e){
-            System.out.println("There was some error in assigning the courser");
-        }
+        adminDaoOperation.assignCourse(courseCode,professorId);
     }
 
     /**
      * Method to view courses
      */
     @Override
-    public Collection<Course> viewCourses() {
-        return courseList.values();
+    public List<Course> viewCourses() {
+        return adminDaoOperation.viewCourses();
     }
 
     /**
@@ -131,16 +76,16 @@ public class AdminImpl implements AdminInterface{
      */
     @Override
     public List<Professor> viewProfessors() {
-        List<Professor> professors = new ArrayList<>(professorList.values());
-        return professors;
+        return adminDaoOperation.viewProfessors();
     }
 
     /**
-     * Method to send notifications
-     * @param studentId,Notification : studentId of student,Notification object
+     * Method to generate report card
+     * @param studentId : studentId of student
      */
     @Override
-    public void sendNotification(String studentId,Notification notification) {
-
+    public List<EnrolledStudent> generateGradeCard(String studentId) {
+        return adminDaoOperation.generateGradeCard(studentId);
     }
+
 }
