@@ -61,7 +61,7 @@ public class User {
 
     /**
      * Role setter
-     * @param role
+     * @param role set role of user
      */
 
     public void setRole(Role role) {
@@ -97,7 +97,7 @@ public class User {
 
     /**
      * Password setter
-     * @param password
+     * @param password set password of user
      */
 
     public void setPassword(String password) {
@@ -115,7 +115,7 @@ public class User {
 
     /**
      * Name setter
-     * @param name
+     * @param name set name of user
      */
 
     public void setName(String name) {
@@ -133,7 +133,7 @@ public class User {
 
     /**
      * Address setter
-     * @param address
+     * @param address set address of user
      */
 
     public void setAddress(String address) {
