@@ -4,7 +4,10 @@ import java.util.*;
 import java.util.Scanner;
 
 import com.flipkart.bean.Course;
+import com.flipkart.bean.EnrolledStudent;
 import com.flipkart.bean.GradeCard;
+import com.flipkart.service.AdminImpl;
+import com.flipkart.service.AdminInterface;
 import com.flipkart.service.CourseCatalogueImpl;
 import com.flipkart.service.StudentImpl;
 
@@ -27,6 +30,7 @@ public class StudentCRSMenu {
      * Student service instance
      */
     StudentImpl studentImpl=new StudentImpl();
+    AdminInterface adminImpl = new AdminImpl();
 
     /**
      * Create CRS menu for student
@@ -150,7 +154,7 @@ public class StudentCRSMenu {
     private void viewGradeCard(String studentId) {
 
 
-        List<GradeCard> grade_card = null;
+        List<EnrolledStudent> grade_card = adminImpl.generateGradeCard(studentId);
         System.out.println(String.format("%-20s %-20s %-20s", "COURSE ID", "GRADE"));
 
         if (grade_card.isEmpty()) {
@@ -158,8 +162,8 @@ public class StudentCRSMenu {
             return;
         }
 
-        for (GradeCard obj : grade_card) {
-            System.out.println(String.format("%-20s %-20s %-20s", obj.getCourseId(), obj.getGrade()));
+        for (EnrolledStudent obj : grade_card) {
+            System.out.println(String.format("%-20s %-20s %-20s", obj.getCourseCode(), obj.getGrade()));
         }
     }
 
