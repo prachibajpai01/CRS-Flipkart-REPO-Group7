@@ -1,15 +1,15 @@
 package com.flipkart.exception;
 /**
- * Exception to check if user is not found
+ * Exception to check if userId is already in use
  */
-public class UserNotFoundException extends Exception {
+public class UserIdAlreadyInUseException extends Exception{
     private String userId;
 
     /**
      * Constructor
      * @param userId: userId of the user
      */
-    public UserNotFoundException(String userId) {
+    public UserIdAlreadyInUseException(String userId) {
         this.userId = userId;
     }
 
@@ -18,14 +18,14 @@ public class UserNotFoundException extends Exception {
      */
     @Override
     public String getMessage() {
-        return "User with ID: " + this.userId + " is not found.";
+        return "User with ID: " + this.userId + " is already in use.";
     }
 
     public static void main(String args[]) {
-        String exampleUserId = "1234";
+        String exampleUserId = "1236";
         try {
-            throw new UserNotFoundException(exampleUserId);
-        } catch (UserNotFoundException e) {
+            throw new UserIdAlreadyInUseException(exampleUserId);
+        } catch (UserIdAlreadyInUseException e) {
             System.out.println(e);
         }
     }
