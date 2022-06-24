@@ -114,7 +114,7 @@ public class AdminDaoOperation implements AdminDaoInterface{
 
             preparedStatement.setString(1,professor.getDepartment());
             preparedStatement.setString(2,professor.getDesignation());
-            preparedStatement.setString(3,professor.getName());
+            preparedStatement.setString(3,professor.getUserName());
 
             int row = preparedStatement.executeUpdate();
 
@@ -133,7 +133,7 @@ public class AdminDaoOperation implements AdminDaoInterface{
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQLQueriesConstants.ADD_USER);
             preparedStatement.setString(1, user.getUserId());
-            preparedStatement.setString(2,user.getName());
+            preparedStatement.setString(2,user.getUserName());
             preparedStatement.setString(3,user.getPassword());
             preparedStatement.setString(4,"professor");
 

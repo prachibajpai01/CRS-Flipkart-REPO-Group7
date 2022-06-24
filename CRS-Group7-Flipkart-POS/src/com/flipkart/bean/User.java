@@ -109,7 +109,7 @@ public class User {
      * @return name
      */
 
-    public String getName() {
+    public String getUserName() {
         return userName;
     }
 
@@ -118,7 +118,7 @@ public class User {
      * @param name set name of user
      */
 
-    public void setName(String name) {
+    public void setUserName(String name) {
         this.userName = name;
     }
 

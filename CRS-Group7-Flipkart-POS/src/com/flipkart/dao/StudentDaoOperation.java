@@ -2,8 +2,6 @@ package com.flipkart.dao;
 
 import com.flipkart.bean.*;
 
-import com.flipkart.service.CourseCatalogueImpl;
-
 import com.flipkart.constant.SQLQueriesConstants;
 
 import com.flipkart.utils.DatabaseUtil;
@@ -20,7 +18,7 @@ public class StudentDaoOperation implements StudentDaoInterface {
         Connection connection = DatabaseUtil.getConnection();
         System.out.println("y");
         Student stu = new Student();
-        stu.setName(userName);
+        stu.setUserName(userName);
         stu.setUserId(userId);
         stu.setPassword(password);
         stu.setBatch(batch);
@@ -65,17 +63,17 @@ public class StudentDaoOperation implements StudentDaoInterface {
     }
 
     @Override
-    public void addCourse(String userId, String courseId, CourseCatalogueImpl courseCatalogue) {
+    public void addCourse(String userId, String courseId) {
 
     }
 
     @Override
-    public void dropCourse(String userId, String courseId, CourseCatalogueImpl courseCatalogue) {
+    public void dropCourse(String userId, String courseId) {
 
     }
 
     @Override
-    public ArrayList<Course> viewCourseList(CourseCatalogueImpl courseCatalogue) {
+    public ArrayList<Course> viewCourseList() {
         return null;
     }
 
@@ -94,7 +92,7 @@ public class StudentDaoOperation implements StudentDaoInterface {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQLQueriesConstants.ADD_USER);
             preparedStatement.setString(1, user.getUserId());
-            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(2, user.getUserName());
             preparedStatement.setString(3, user.getPassword());
             preparedStatement.setString(4, "student");
 

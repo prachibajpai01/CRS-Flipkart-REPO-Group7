@@ -5,7 +5,6 @@ import com.flipkart.constant.Role;
 import com.flipkart.service.AdminImpl;
 import com.flipkart.service.AdminInterface;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -160,7 +159,7 @@ public class AdminCRSMenu {
         System.out.println("Enter Password:");
         String password = s.next();
         professor.setPassword(password);
-        professor.setName(professorUserName);
+        professor.setUserName(professorUserName);
 
         System.out.println("Enter Address:");
         String address = s.next();
@@ -184,7 +183,7 @@ public class AdminCRSMenu {
         System.out.println("*************************** Professor *************************** ");
         System.out.println(String.format("%20s | %20s | %20s ", "ProfessorId", "Name", "Designation"));
         for(Professor professor : professorList) {
-            System.out.println(String.format("%20s | %20s | %20s ", professor.getUserId(), professor.getName(), professor.getDesignation()));
+            System.out.println(String.format("%20s | %20s | %20s ", professor.getUserId(), professor.getUserName(), professor.getDesignation()));
         }
 
 
@@ -226,7 +225,7 @@ public class AdminCRSMenu {
         }
         System.out.println(String.format("%20s | %20s | %20s ", "UserId", "StudentId", "Name"));
         for(Student student : pendingStudentsList) {
-            System.out.println(String.format("%20s | %20s | %20s", student.getUserId(), student.getUserId(), student.getName()));
+            System.out.println(String.format("%20s | %20s | %20s", student.getUserId(), student.getUserId(), student.getUserName()));
         }
         return pendingStudentsList;
     }
