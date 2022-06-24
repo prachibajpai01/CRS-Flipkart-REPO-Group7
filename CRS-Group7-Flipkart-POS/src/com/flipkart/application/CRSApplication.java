@@ -12,11 +12,24 @@ public class CRSApplication {
         do{
             System.out.println("----------Welcome to CRS Application---------");
             System.out.println("1. Login");
-            System.out.println("2. Student Registration");
-            System.out.println("3. Update password");
-            System.out.println("4. Exit");
+            System.out.println("2. Update password");
+            System.out.println("3. Exit");
             System.out.println("Enter your choice :");
             userInput=sc.nextInt();
-        }while(userInput!=4);
+
+            if(userInput==1){
+                login();
+            }
+        }while(userInput!=3);
+    }
+
+    public static void login(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Give user ID:");
+        String userId = sc.next();
+        System.out.print("Give password:");
+        String password = sc.next();
+
+
     }
 }
