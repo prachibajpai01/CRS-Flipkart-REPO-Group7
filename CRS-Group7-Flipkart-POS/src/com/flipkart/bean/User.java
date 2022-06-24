@@ -2,18 +2,48 @@ package com.flipkart.bean;
 
 import com.flipkart.constant.Role;
 
-// base class for User which will be inherited by student, professor and admin.
+/**
+ * Base class for student, professor and admin
+ */
 public class User {
-    private String userId; // every user has a userId to identify them
-    private String password; // password to authenticate
 
-    private String userName; // name of the user
-    private String address; // address of the user
+    /**
+     * ID of user
+     */
+    private String userId;
 
-    private Role role; // role of user either student, professor or admin
+    /**
+     * password of user
+     */
+    private String password;
 
+    /**
+     * name of user
+     */
+    private String userName;
+
+    /**
+     * address of user
+     */
+    private String address;
+
+    /**
+     * Role of user
+     */
+    private Role role;
+
+    /**
+     * User constructor
+     */
     public User(){}
 
+    /**
+     * User constructor
+     * @param userId ID of user
+     * @param password password of user
+     * @param userName name of user
+     * @param role role of user
+     */
     public User(String userId,String password,String userName,Role role){
         this.userId = userId;
         this.password = password;
@@ -21,42 +51,90 @@ public class User {
         this.role = role;
     }
 
-    // getters and setters for all attributes
+    /**
+     * Role getter
+     * @return role
+     */
     public Role getRole() {
         return role;
     }
+
+    /**
+     * Role setter
+     * @param role
+     */
 
     public void setRole(Role role) {
         this.role = role;
     }
 
+    /**
+     * User ID getter
+     * @return user ID
+     */
+
     public String getUserId() {
         return userId;
     }
+
+    /**
+     * User Id setter
+     * @param userId ID of user
+     */
 
     public void setUserId(String userId) {
         this.userId = userId;
     }
 
+    /**
+     * Password getter
+     * @return password
+     */
+
     public String getPassword() {
         return password;
     }
+
+    /**
+     * Password setter
+     * @param password
+     */
 
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * Name getter
+     * @return name
+     */
+
     public String getName() {
         return userName;
     }
+
+    /**
+     * Name setter
+     * @param name
+     */
 
     public void setName(String name) {
         this.userName = name;
     }
 
+    /**
+     * Address getter
+     * @return address
+     */
+
     public String getAddress() {
         return address;
     }
+
+    /**
+     * Address setter
+     * @param address
+     */
 
     public void setAddress(String address) {
         this.address = address;

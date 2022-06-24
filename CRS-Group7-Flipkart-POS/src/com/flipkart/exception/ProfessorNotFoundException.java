@@ -3,6 +3,11 @@ package com.flipkart.exception;
 public class ProfessorNotFoundException extends Exception{
     private String professorId;
 
+    /**
+     * Parameterized constructor
+     * @param userId : professor object
+     */
+
     public ProfessorNotFoundException(String userId) {
         this.professorId = professorId;
     }

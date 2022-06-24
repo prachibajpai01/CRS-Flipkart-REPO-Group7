@@ -11,10 +11,24 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class for Admin CRS menu
+ */
 public class AdminCRSMenu {
 
+    /**
+     * Scanner to take user input
+     */
     Scanner s = new Scanner(System.in);
+
+    /**
+     * Admin service instance
+     */
     AdminInterface adminImpl = new AdminImpl();
+
+    /**
+     * Display menu with various options for admin
+     */
     public void createMenu(){
         while(CRSApplication.loggedin){
             System.out.println("*****************************");
@@ -72,6 +86,9 @@ public class AdminCRSMenu {
     }
 
 
+    /**
+     * Admin can add course with a course code and name to catalogue.
+     */
     private void addCourseToCatalogue() {
         List<Course> courseList = viewCoursesInCatalogue();
 
@@ -122,6 +139,9 @@ public class AdminCRSMenu {
         adminImpl.approveStudent(studentUserId);
     }
 
+    /**
+     * Admin can add a professor with their details.
+     */
     private void addProfessor() {
         System.out.println("Enter Username:");
         String professorUserName = s.next();

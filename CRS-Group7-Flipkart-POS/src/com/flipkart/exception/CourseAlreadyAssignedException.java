@@ -1,6 +1,6 @@
 package com.flipkart.exception;
 
-public class CourseAlreadyAssignedException extends Exception{
+public class CourseAlreadyAssignedException extends Exception {
     String courseId;
 
     public CourseAlreadyAssignedException(String courseId){

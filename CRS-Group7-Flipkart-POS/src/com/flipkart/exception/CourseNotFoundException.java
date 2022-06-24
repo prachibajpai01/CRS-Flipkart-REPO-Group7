@@ -1,11 +1,20 @@
 package com.flipkart.exception;
 
-public class CourseNotFoundException extends Exception {
+public class CourseNotFoundException extends Exception{
     String courseId;
+
+    /**
+     * Parameterized constructor
+     * @param courseId : course Id
+     */
 
     public CourseNotFoundException(String courseId){
         this.courseId=courseId;
     }
+
+    /**
+     *Message thrown by exception
+     */
 
     @Override
     public String getMessage(){
