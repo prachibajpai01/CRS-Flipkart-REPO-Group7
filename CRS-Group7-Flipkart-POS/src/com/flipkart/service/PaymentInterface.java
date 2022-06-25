@@ -12,5 +12,11 @@ public interface PaymentInterface {
      */
     ArrayList<Payment> getPaymentInfo(String studentId);
 
+    /**
+     * Make payment for certain reference ID with a payment type (UPI/Cheque/Net banking)
+     * @param referenceId reference ID of transaction
+     * @param paymentType payment type
+     * @return success or failure
+     */
     Boolean makePayment(String referenceId, String paymentType);
 }
