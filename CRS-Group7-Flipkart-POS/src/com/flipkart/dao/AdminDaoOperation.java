@@ -89,7 +89,7 @@ public class AdminDaoOperation implements AdminDaoInterface{
             int row = preparedStatement.executeUpdate();
 
             if(row > 0){
-                System.out.println("Student with username " + studentId + "approved by admin");
+                System.out.println("Student with username " + studentId + " approved by admin");
             }
             else{
                 System.out.println("Student with " + studentId + "not found.");

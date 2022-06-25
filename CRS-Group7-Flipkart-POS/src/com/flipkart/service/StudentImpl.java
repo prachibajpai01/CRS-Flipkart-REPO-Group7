@@ -15,7 +15,6 @@ public class StudentImpl implements StudentInterface{
 
     @Override
     public void register(String name,String userId,String password,int batch,String branch,String address){
-        System.out.println("hhhhhh"+branch);
         studentDaoInterface.register(name, userId, password, batch, branch, address);
     }
 
@@ -25,7 +24,7 @@ public class StudentImpl implements StudentInterface{
      */
     @Override
     public String getStudentId(String userId){
-        return userId;
+        return studentDaoInterface.getStudentId(userId);
     }
 
     /**

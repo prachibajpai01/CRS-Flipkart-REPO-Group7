@@ -39,7 +39,7 @@ public class SQLQueriesConstants {
 
     public static final String GET_PAYMENT_INFO = "Select * from payment where studentId=?";
 
-    public static final String IS_APPROVED = "SELECT isApproved FROM student WHERE userId = ? ";
+    public static final String IS_APPROVED = "SELECT approved FROM student WHERE userId = ? ";
 
     public static final String VIEW_REGISTERED_COURSES = "SELECT * FROM registered_courses where studentId=?";
 
