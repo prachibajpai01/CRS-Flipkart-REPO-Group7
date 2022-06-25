@@ -10,4 +10,6 @@ import java.util.ArrayList;
 
 public interface PaymentDaoInterface {
     public ArrayList<Payment> getPaymentInfo(String studentId);
-    }
+
+    public Boolean makePayment(String referenceId, String paymentType);
+}

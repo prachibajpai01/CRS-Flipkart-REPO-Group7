@@ -37,4 +37,24 @@ public class PaymentDaoOperation implements PaymentDaoInterface{
         return result;
     }
 
+    @Override
+    public Boolean makePayment(String referenceId, String paymentType){
+        try{
+            Connection conn = DatabaseUtil.getConnection();
+            String sql = SQLQueriesConstants.MAKE_PAYMENT;
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, paymentType);
+            stmt.setString(2, referenceId);
+            int row = stmt.executeUpdate();
+            if(row==0){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }catch (SQLException se){
+            System.out.println("Exception caught: "+se);
+        }
+        return false;
+    }
 }

@@ -10,5 +10,7 @@ public interface PaymentInterface {
      * @param studentId
      * @return
      */
-    public ArrayList<Payment> getPaymentInfo(String studentId);
+    ArrayList<Payment> getPaymentInfo(String studentId);
+
+    Boolean makePayment(String referenceId, String paymentType);
 }

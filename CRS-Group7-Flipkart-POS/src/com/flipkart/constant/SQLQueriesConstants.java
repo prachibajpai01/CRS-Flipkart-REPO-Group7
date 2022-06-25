@@ -63,5 +63,6 @@ public class SQLQueriesConstants {
     public static final String UPDATE_PAYMENT = "UPDATE payment SET status = 1, paymentType = ? WHERE status = 0 AND studentId = ?";
     public static final String GET_REFID_PAYMENT = "SELECT referenceId FROM payment WHERE status = 0 AND studentId = ?";
 
+    public static final String MAKE_PAYMENT = "update payment set status=true, paymentType=? where referenceId=?";
 
 }
