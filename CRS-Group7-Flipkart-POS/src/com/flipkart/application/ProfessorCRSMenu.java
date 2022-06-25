@@ -98,8 +98,8 @@ public class ProfessorCRSMenu {
                 return;
             }
             System.out.println("Students are !!");
-            for (int i = 0; i < data.size(); i++) {
-                System.out.println(data.get(i).getStudentId() + " ");
+            for (EnrolledStudent student: data) {
+                System.out.println(student.getStudentId() + " ");
             }
 
         }
@@ -110,9 +110,9 @@ public class ProfessorCRSMenu {
                 System.out.println("No courses found");
                 return;
             }
-            for (int i = 0; i < courses.size(); i++) {
-                System.out.println(courses.get(i).getCourseName() + " ");
-
+            System.out.println("Courses are !!");
+            for (Course course:courses) {
+                System.out.println(course.getCourseName() + " ");
 
             }
         }
