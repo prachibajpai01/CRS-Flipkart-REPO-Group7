@@ -72,17 +72,19 @@ public class ProfessorCRSMenu {
         private void addGrade (String profId){
 
             System.out.println("Enter student Id");
-            String studentId = sc.nextLine();
-            sc.nextLine();
+            String studentId = sc.next();
+
             System.out.println("Enter Grade");
-            String grade = sc.nextLine();
+            String grade = sc.next();
 
             System.out.println("Enter Course Code :");
 
-            String courseCode = sc.nextLine();
+            String courseCode = sc.next();
 
             if (professorImpl.addGrade(studentId, courseCode, grade))
                 System.out.println("Grade added successfully");
+            else
+                System.out.println("Either course code or student id is wrong");
         }
 
         /**
@@ -95,6 +97,7 @@ public class ProfessorCRSMenu {
                 System.out.println("No student found!!");
                 return;
             }
+            System.out.println("Students are !!");
             for (int i = 0; i < data.size(); i++) {
                 System.out.println(data.get(i).getStudentId() + " ");
             }
