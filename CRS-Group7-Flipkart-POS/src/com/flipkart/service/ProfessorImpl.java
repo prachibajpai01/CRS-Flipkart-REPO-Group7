@@ -17,14 +17,8 @@ public class ProfessorImpl implements ProfessorInterface {
      */
     @Override
     public boolean addGrade(String studentId, String courseCode, String grade) {
-        try
-        {
-            professorDaoInterface.addGrade(studentId, courseCode, grade);
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return true;
+         return   professorDaoInterface.addGrade(studentId, courseCode, grade);
+
     }
 
     /**
@@ -33,14 +27,7 @@ public class ProfessorImpl implements ProfessorInterface {
      */
     @Override
     public List<EnrolledStudent> viewEnrolledStudents(String profId) {
-        try
-        {
-          return  professorDaoInterface.viewEnrolledStudents(profId);
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
+        return  professorDaoInterface.viewEnrolledStudents(profId);
     }
 
     /**
