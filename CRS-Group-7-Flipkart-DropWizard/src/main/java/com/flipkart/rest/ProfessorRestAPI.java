@@ -5,12 +5,7 @@ import java.util.List;
 
 import javax.validation.ValidationException;
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -63,7 +58,7 @@ public class ProfessorRestAPI {
 
     }
 
-    @POST
+    @PUT
     @Path("/addGrade")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addGrade(
@@ -77,26 +72,15 @@ public class ProfessorRestAPI {
 
         try
         {
-            List<EnrolledStudent> enrolledStudents=new ArrayList<EnrolledStudent>();
-            enrolledStudents=professorInterface.viewEnrolledStudents(profId);
-            List<Course> coursesEnrolled=new ArrayList<Course>();
-            coursesEnrolled	=professorInterface.getCourses(profId);
-            if(ProfessorValidator.isValidStudent(enrolledStudents, studentId) && ProfessorValidator.isValidCourse(coursesEnrolled, courseCode))
-            {
+
                 professorInterface.addGrade(studentId, courseCode, grade);
-            }
-            else
-            {
-                //error code
-                return Response.status(500).entity( "Something went wrong, Please Try Again ! ").build();
-            }
+
         }
         catch(Exception ex)
         {
             return Response.status(500).entity( "Something went wrong, Please Try Again ! ").build();
         }
         return Response.status(200).entity( "Grade updated for student: "+studentId).build();
-
     }
 
 

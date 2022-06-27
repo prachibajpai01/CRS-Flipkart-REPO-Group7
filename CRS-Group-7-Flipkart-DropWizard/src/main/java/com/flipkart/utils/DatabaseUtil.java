@@ -12,9 +12,7 @@ public class DatabaseUtil {
     final static String PASS = "flipkart";
 
     public static Connection getConnection() {
-        if(connection != null)
-            return connection;
-        else{
+
             try{
                 Class.forName(JDBC_DRIVER);
                 connection = DriverManager.getConnection(DB_URL,USER,PASS);
@@ -22,7 +20,7 @@ public class DatabaseUtil {
             }catch (Exception e){
                 e.printStackTrace();
             }
-        }
+        
         return connection;
     }
 }

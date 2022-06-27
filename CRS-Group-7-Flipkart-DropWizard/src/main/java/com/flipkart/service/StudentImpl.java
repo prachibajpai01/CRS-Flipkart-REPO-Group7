@@ -44,13 +44,6 @@ public class StudentImpl implements StudentInterface{
     @Override
     public Boolean addCourse(String userId, String courseId) {
         return studentDaoInterface.addCourse(userId, courseId);
-//        if(!studentCourseData.containsKey(userId)){
-//            studentCourseData.put(userId, new HashSet<>());
-//        }
-//
-//        studentCourseData.get(userId).add(courseId);
-//        //System.out.println(userId+" "+courseId);
-//        courseCatalogue.enrollStudent(userId, courseId);
     }
 
     /**
@@ -61,8 +54,6 @@ public class StudentImpl implements StudentInterface{
     @Override
     public Boolean dropCourse(String userId, String courseId) {
         return studentDaoInterface.dropCourse(userId, courseId);
-//        studentCourseData.get(userId).remove(courseId);
-//        courseCatalogue.unenrollStudent(userId, courseId);
     }
 
     /**
@@ -82,7 +73,7 @@ public class StudentImpl implements StudentInterface{
      * @return
      */
     @Override
-    public List<Course> viewRegisteredCourses(String userId) {
+    public List<EnrolledStudent> viewRegisteredCourses(String userId) {
         return studentDaoInterface.viewRegisteredCourses(userId);
     }
 

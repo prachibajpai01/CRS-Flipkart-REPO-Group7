@@ -80,11 +80,6 @@ public class StudentDaoOperation implements StudentDaoInterface {
         return false;
     }
 
-    public static void main(String args[]){
-        //System.out.println(addCourse("akash", "01"));
-        //System.out.println(dropCourse("akash", "01"));
-    }
-
     @Override
     public String getStudentId(String userId) {
         return userId;
@@ -182,8 +177,10 @@ public class StudentDaoOperation implements StudentDaoInterface {
 
 
     @Override
-    public List<Course> viewRegisteredCourses(String userId) {
+    public List<EnrolledStudent> viewRegisteredCourses(String userId) {
         Connection connection = DatabaseUtil.getConnection();
+
+        List<EnrolledStudent> registeredCourses = new ArrayList<>();
         String sql = SQLQueriesConstants.VIEW_REGISTERED_COURSES;
 
         PreparedStatement statement = null;
@@ -194,13 +191,18 @@ public class StudentDaoOperation implements StudentDaoInterface {
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next())
             {
-                System.out.println("Semester - " + resultSet.getInt("semester") + " - " + resultSet.getString("courseCode"));
+                EnrolledStudent course = new EnrolledStudent();
+                course.setCourseCode(resultSet.getString("courseCode"));
+                course.setSem(resultSet.getInt("semester"));
+                course.setStudentId(userId);
+                course.setGrade(resultSet.getString("grade"));
+                registeredCourses.add(course);
             }
             System.out.println("this is viewing registered courses");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return registeredCourses;
     }
 
     @Override

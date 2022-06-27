@@ -51,7 +51,7 @@ public interface StudentInterface {
      * @param userId: studentId of the student
      * @return
      */
-    public List<Course> viewRegisteredCourses(String userId);
+    public List<EnrolledStudent> viewRegisteredCourses(String userId);
 
     /**
      * Method to view grade of student

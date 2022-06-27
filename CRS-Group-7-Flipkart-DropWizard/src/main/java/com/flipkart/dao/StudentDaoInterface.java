@@ -13,7 +13,7 @@ public interface StudentDaoInterface {
     public List<Course> viewCourseList(String studentId);
     public Boolean dropCourse(String userId, String courseId);
 
-    public List<Course> viewRegisteredCourses(String userId);
+    public List<EnrolledStudent> viewRegisteredCourses(String userId);
     public List<EnrolledStudent> viewGradeCard(String studentId);
 
     public void addUser(User user);

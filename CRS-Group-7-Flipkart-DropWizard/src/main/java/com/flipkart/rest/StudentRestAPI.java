@@ -10,7 +10,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -90,7 +89,7 @@ public class StudentRestAPI {
      * @return
      * @throws ValidationException
      */
-    @PUT
+    @POST
     @Path("/addCourse")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addCourse(
@@ -99,14 +98,11 @@ public class StudentRestAPI {
             @NotNull
             @QueryParam("studentId") String studentId) throws ValidationException{
 
-        if(adminInterface.getRegistrationStatus(studentId) == false)
-            return Response.status(200).entity("Student course registration is pending").build();
-
         try{
 
             List<Course> availCourseList = studentInterface.viewAvailableCourseList(studentId);
             adminInterface.checkCourse(courseCode, studentId, availCourseList);
-            studentInterface.addCourse(courseCode, studentId);
+            studentInterface.addCourse(studentId, courseCode);
 
             return Response.status(201).entity( "You have successfully added Course : " + courseCode).build();
 
@@ -139,8 +135,6 @@ public class StudentRestAPI {
             @NotNull
             @QueryParam("studentId") String studentId) throws ValidationException{
 
-        if(adminInterface.getRegistrationStatus(studentId) == false)
-            return Response.status(200).entity("Student course registration is pending").build();
 
         studentInterface.dropCourse(courseCode, studentId);
         return Response.status(201).entity( "You have successfully dropped Course : " + courseCode).build();
@@ -174,7 +168,7 @@ public class StudentRestAPI {
     @GET
     @Path("/viewRegisteredCourses")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Course> viewRegisteredCourse(
+    public List<EnrolledStudent> viewRegisteredCourse(
             @NotNull
             @QueryParam("studentId") String studentId) throws ValidationException{
 
@@ -194,7 +188,6 @@ public class StudentRestAPI {
     public List<EnrolledStudent> viewGradeCard(
             @NotNull
             @QueryParam("studentId") String studentId) throws ValidationException{
-
 
         List<EnrolledStudent> grade_card = studentInterface.viewGradeCard(studentId);
         return grade_card;
